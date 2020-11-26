@@ -1,0 +1,26 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "This Project is part of theodinprojectcurriculum.",
+  "private": true,
+  "scripts": {
+    "build": "webpack --mode=production",
+    "dev": "webpack serve --content-base dist --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoderOO7/todo-list.git"
+  },
+  "author": "CoderOO7 <shubhamyadav.70007@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CoderOO7/todo-list/issues"
+  },
+  "homepage": "https://github.com/CoderOO7/todo-list#readme",
+  "devDependencies": {
+    "webpack": "^5.7.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
