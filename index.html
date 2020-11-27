@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo-list</title>
+
+    <!-- Personal Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Fontawesome Script -->
+    <script src="https://kit.fontawesome.com/4225c160a9.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div id="content"></div>
+    <div class="grid-container">
+        <!-- Main Navigation -->
+        <header class="header">
+            <div class="header__inner">
+                <button class="header__btn header__hamburger-btn" aria-label="Close Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="header__btn header__home-btn" aria-label="Go To Start Page">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+        <!-- Side Navbar -->
+        <aside class="sidenav">
+            <ul class="sidenav__list">
+                <li class="sidenav__item"><span class="sidenav__item-icon">:)</span>
+                    <span class="sidenav__item-content">All Taks</span>
+                    <span class="sidenav__item-counter"></span></li>
+                <li class="sidenav__item"><span class="sidenav__item-icon">:)</span>
+                    <span class="sidenav__item-content">Today</span>
+                    <span class="sidenav__item-counter"></span></li>
+                <li class="sidenav__item"><span class="sidenav__item-icon">:)</span>
+                    <span class="sidenav__item-content">Week</span>
+                    <span class="sidenav__item-counter"></span></li>
+                <li class="sidenav__item"><span class="sidenav__item-icon">:)</span>
+                    <span class="sidenav__item-content">Projects</span>
+                    <span class="sidenav__item-counter"></span></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <div id="content"></div>
+        </main>
+
+        <footer class="footer">
+            <small>
+                <span class="footer__copyright">&copy;2020</span>
+                <span class="footer__signature">Made by Coderoo7</span>
+            </small>
+        </footer>
+    </div>
+
     <script src="main.js"></script>
+    
+    <script>
+        const hamburgerBtnEl = document.querySelector('.header__hamburger-btn');
+        const sidenavEl = document.querySelector('.sidenav');
+        
+        function toggleClassName(el,className){
+            el.classList.toggle(className);
+        }
+        
+        hamburgerBtnEl.addEventListener('click',(e)=>{
+            toggleClassName(sidenavEl,'active');
+        })
+        
+    </script>
 </body>
+
 </html>
