@@ -1,0 +1,169 @@
+*,
+:before,
+:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+ul {
+  list-style: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 6vh 1fr 4vh;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  min-height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  padding: 0 5vh;
+  background-color: #3d3d3d;
+  z-index: 2;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+}
+
+.header__btn {
+  color: #fff;
+  padding: 0.4rem;
+  margin-right: 1.6rem;
+  font-size: 2rem;
+}
+
+.header__btn:hover {
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 100%, 0.2);
+}
+
+.sidenav {
+  grid-area: sidenav;
+  position:fixed;
+  overflow-y: auto;
+  height: 100%;
+  width:250px;
+  padding: 3vh 1vh 3vh 4vh;
+  font-size: 2rem;
+  transform: translateX(-255px);
+  transition: all 0.6s ease-in;
+  background-color: #fafafa;
+}
+
+/* The active class is toggled on hamburger and close icon clicks */
+.sidenav--active {
+  transform: translateX(0);
+}
+
+.sidenav__filters{
+    margin-top: 4vh;
+}
+
+.sidenav__item {
+  padding: 2vh;
+  cursor: pointer;
+}
+
+.sidenav__item:hover {
+  background-color: #fff;
+}
+
+.sidenav__expandable-header{
+  display: flex;
+  justify-content: space-between;
+  max-height: 4000em;
+  visibility: visible; 
+  transition:  all 0.6s ease-in;
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.sidenav__expandable-header:hover{
+  background-color: #f7f7f7;
+}
+
+.sidenav__expandable-toggle{
+  flex: 1;
+  display: flex;
+  margin-right: 1rem;
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.sidenav__expandable-toggle-heading{
+  font-weight: 600;
+}
+
+.sidenav__expandable-action{
+  cursor: pointer;
+}
+
+.sidenav__expandable-list{
+  padding-left: 2vh;
+  overflow: hidden;
+}
+
+.sidenav__expandable-list--collapse{
+  max-height: 0;
+  visibility: hidden;
+  transition:  all 0.6s ease-in;
+}
+
+.main {
+  grid-area: main;
+  background-color: #fff;
+}
+
+.footer {
+  grid-area: footer;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #3d3d3d;
+  z-index: 2;
+}
+
+/* Common Styling */
+.header__btn, .sidenav__btn{
+  cursor: pointer;
+  border: none;
+  outline:none;
+  background: transparent;
+}
+
+.sidenav__expandable-toggle,.sidenav__expandable-action{
+  padding: 2vh;
+}
+
+/* Non-mobile style 750px breakpoint */
+@media only screen and (min-width: 46.875em) {
+  .grid-container{
+      grid-template-columns: 250px 1fr;
+      grid-template-areas:
+        "header header"
+        "sidenav main"
+        "footer footer";
+  }
+  .sidenav {
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+  }
+}
