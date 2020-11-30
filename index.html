@@ -96,6 +96,14 @@
         sidenavExpandableHeaderEL.addEventListener('click',(e)=>{
             toggleClassName(sidenavExpandableListEl,'sidenav__expandable-list--collapse');
         })
+
+        window.addEventListener('DOMContentLoaded',(e)=>{
+            const ww = window.innerWidth;
+            /* For Desktop display by default open sideNav*/
+            if(ww > 750){
+                toggleClassName(sidenavEl,'sidenav--active');
+            }
+        })
         
     </script>
 </body>
