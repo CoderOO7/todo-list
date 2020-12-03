@@ -108,7 +108,17 @@ ul {
   font-weight: 600;
 }
 
+.sidenav__expandable-toggle-icon{
+  transform: rotate(-90deg);
+}
+
+.sidenav__expandable-toggle[aria-expanded=true]
+.sidenav__expandable-toggle-icon{
+  transform: rotate(0deg);
+}
+
 .sidenav__expandable-toggle-heading{
+  margin-left: 0.6rem;
   font-weight: 600;
 }
 
@@ -119,6 +129,12 @@ ul {
 .sidenav__expandable-list{
   padding-left: 2vh;
   overflow: hidden;
+}
+
+.sidenav__expandable-list .sidenav__item-icon{
+  padding: 0.6rem;
+  border-radius: 50%;
+  border: 1px solid black;  
 }
 
 .sidenav__expandable-list--collapse{
@@ -153,6 +169,15 @@ ul {
 
 .sidenav__expandable-toggle,.sidenav__expandable-action{
   padding: 2vh;
+}
+
+.sidenav__item,.sidenav__item-icon{
+  display: flex;
+  align-items: center;
+}
+
+.sidenav__expandable-toggle-heading,.sidenav__item-content{
+  margin-left: 0.6rem; 
 }
 
 /* Non-mobile style 750px breakpoint */
