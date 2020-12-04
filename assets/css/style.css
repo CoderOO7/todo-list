@@ -6,6 +6,16 @@
   box-sizing: border-box;
 }
 
+:root{
+  --white: #fff;
+  --albaster: #fafafa;
+  --albaster-dark: #f7f7f7;
+  --alto: #ddd;
+  --seashell: #f1f1f1;
+  --mine-shaft: #2f2f2f;
+  --mine-shaft-light: #3d3d3d;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -33,7 +43,7 @@ ul {
   grid-area: header;
   display: flex;
   padding: 0 5vh;
-  background-color: #3d3d3d;
+  background-color: var(--mine-shaft-light);
   z-index: 2;
 }
 
@@ -43,7 +53,7 @@ ul {
 }
 
 .header__btn {
-  color: #fff;
+  color: var(--white);
   padding: 0.4rem;
   margin-right: 1.6rem;
   font-size: 2rem;
@@ -64,7 +74,7 @@ ul {
   font-size: 2rem;
   transform: translateX(-255px);
   transition: all 0.6s ease-in;
-  background-color: #fafafa;
+  background-color: var(--albaster);
   z-index: 1;
 }
 
@@ -83,7 +93,7 @@ ul {
 }
 
 .sidenav__item:hover {
-  background-color: #fff;
+  background-color: var(--white);
 }
 
 .sidenav__expandable-header{
@@ -92,11 +102,11 @@ ul {
   max-height: 4000em;
   visibility: visible; 
   transition:  all 0.6s ease-in-out;
-  border-bottom: 2px solid #f1f1f1;
+  border-bottom: 2px solid var(--seashell);
 }
 
 .sidenav__expandable-header:hover{
-  background-color: #f7f7f7;
+  background-color: var(--albaster-dark);
 }
 
 .sidenav__expandable-toggle{
@@ -138,7 +148,7 @@ ul {
 
 .main {
   grid-area: main;
-  background-color: #fff;
+  background-color: var(--white);
   font-size: 1.4rem;
   grid-column: 1/3;
 }
@@ -151,7 +161,7 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom:2px solid #f1f1f1;
+  border-bottom:2px solid var(--seashell);
 }
 
 .main__task-header-content{
@@ -192,8 +202,8 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  background-color: #3d3d3d;
+  color: var(--white);
+  background-color: var(--mine-shaft-light);
   z-index: 2;
 }
 
@@ -220,9 +230,9 @@ ul {
   flex-direction: column;
   justify-content: space-between;
   width: 70vmin;
-  font-size: 2rem;
+  font-size: 2.4rem;
   height: auto;
-  background: #fafafa;
+  background: var(--albaster);
 }
 
 .modal__form > *{
@@ -243,6 +253,7 @@ ul {
   width: 100%;
   padding: 0.6rem 1rem;
   border-radius: 0.2rem;
+  font-size: 1.6rem;
 }
 
 .modal__form-footer{
@@ -271,7 +282,8 @@ ul {
 
 .sidenav__item,
 .main__task-item-check,
-.main__task-item-content{
+.main__task-item-content,
+.modal__form-action-btn{
   cursor: pointer;
 }
 
@@ -296,7 +308,7 @@ ul {
 }
 
 .modal__form-header,.modal__form-body{
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid var(--alto);
 }
 
 /* Non-mobile style 750px breakpoint */
