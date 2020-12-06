@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo-list</title>
 
     <!-- Personal Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
     <!-- Fontawesome Script -->
     <script src="https://kit.fontawesome.com/4225c160a9.js" crossorigin="anonymous"></script>
 </head>
@@ -43,7 +43,8 @@
                             </svg>
                         </span>
                         <span class="sidenav__item-content">All Tasks</span>
-                        <span class="sidenav__item-counter"></span></li>
+                        <span class="sidenav__item-counter"></span>
+                    </li>
                     <li class="sidenav__item">
                         <span class="sidenav__item-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24">
@@ -53,7 +54,8 @@
                                     </path>
                                     <path fill-rule="nonzero"
                                         d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H6zm1 3h10a.5.5 0 1 1 0 1H7a.5.5 0 0 1 0-1z">
-                                    </path><text
+                                    </path>
+                                    <text
                                         font-family="-apple-system, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
                                         font-size="9" transform="translate(4 2)" font-weight="500">
                                         <tspan x="8" y="15" text-anchor="middle">03</tspan>
@@ -62,7 +64,8 @@
                             </svg>
                         </span>
                         <span class="sidenav__item-content">Today</span>
-                        <span class="sidenav__item-counter"></span></li>
+                        <span class="sidenav__item-counter"></span>
+                    </li>
                     <li class="sidenav__item">
                         <span class="sidenav__item-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24">
@@ -76,22 +79,33 @@
                             </svg>
                         </span>
                         <span class="sidenav__item-content">Week</span>
-                        <span class="sidenav__item-counter"></span></li>
+                        <span class="sidenav__item-counter"></span>
+                    </li>
                 </ul>
             </div>
             <div class="sidenav__expandable">
                 <header class="sidenav__expandable-header">
                     <button class="sidenav__btn sidenav__expandable-toggle" aria-expanded="false">
                         <span class="sidenav__expandable-toggle-icon">
-                            <svg width="16px" height="16px" viewBox="0 0 16 16"><g transform="translate(-266, -17)" fill="#777777"><path d="M280,22.7581818 L279.1564,22 L273.9922,26.506 L273.4414,26.0254545 L273.4444,26.0281818 L268.8562,22.0245455 L268,22.7712727 C269.2678,23.878 272.8084,26.9674545 273.9922,28 C274.8718,27.2330909 274.0144,27.9809091 280,22.7581818"></path></g></svg>
+                            <svg width="16px" height="16px" viewBox="0 0 16 16">
+                                <g transform="translate(-266, -17)" fill="#777777">
+                                    <path
+                                        d="M280,22.7581818 L279.1564,22 L273.9922,26.506 L273.4414,26.0254545 L273.4444,26.0281818 L268.8562,22.0245455 L268,22.7712727 C269.2678,23.878 272.8084,26.9674545 273.9922,28 C274.8718,27.2330909 274.0144,27.9809091 280,22.7581818">
+                                    </path>
+                                </g>
+                            </svg>
                         </span>
                         <span class="sidenav__expandable-toggle-heading">Projects</span>
                     </button>
-                    <span class="sidenav__expandable-action">+</span>
+                    <span class="sidenav__expandable-action">
+                        <svg width="13" height="13">
+                            <path
+                                d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </span>
                 </header>
-                <ul class="sidenav__expandable-list sidenav__expandable-list--collapse">
-                    
-                </ul>
+                <ul class="sidenav__expandable-list sidenav__expandable-list--collapse"></ul>
             </div>
         </aside>
 
@@ -105,24 +119,86 @@
                         </div>
                         <div class="main__task-header-actions">
                             <button class="main__task-header-action-btn main__task-header-action-btn--sort">
-                                <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16.854 5.146l3 3a.502.502 0 01-.708.708L17 6.707V18.5a.5.5 0 01-1 0V6.707l-2.146 2.147a.502.502 0 01-.708-.708l3-3a.502.502 0 01.708 0zM7.5 5a.5.5 0 01.5.5v11.791l2.146-2.145a.502.502 0 01.708.708l-3 3a.502.502 0 01-.708 0l-3-3a.502.502 0 01.708-.708L7 17.293V5.5a.5.5 0 01.5-.5z"></path></svg>
+                                Due Date
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16.854 5.146l3 3a.502.502 0 01-.708.708L17 6.707V18.5a.5.5 0 01-1 0V6.707l-2.146 2.147a.502.502 0 01-.708-.708l3-3a.502.502 0 01.708 0zM7.5 5a.5.5 0 01.5.5v11.791l2.146-2.145a.502.502 0 01.708.708l-3 3a.502.502 0 01-.708 0l-3-3a.502.502 0 01.708-.708L7 17.293V5.5a.5.5 0 01.5-.5z">
+                                    </path>
+                                </svg>
                             </button>
-                        </div> 
+                        </div>
                     </header>
                     <div class="main__task-body">
                         <ul class="main__task-list">
                             <li class="main__task-item">
-                                <div class="main__task-item-check"></div>
-                                <div class="main__task-item-content">TheOdinProject</div>
+                                <div class="main__task-item-info">
+                                    <div class="main__task-item-check"></div>
+                                    <div class="main__task-item-content">TheOdinProject</div>
+                                    <div class="main__task-item-dueDate">04-12-2020</div>
+                                </div>
                                 <div class="main__task-item-actions">
-                                    <button type="button" class="main__task-item-action-btn main__task-item-action-btn--edit">
-                                        <svg width="24" height="24"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M9.5 19h10a.5.5 0 110 1h-10a.5.5 0 110-1z"></path><path stroke="currentColor" d="M4.42 16.03a1.5 1.5 0 00-.43.9l-.22 2.02a.5.5 0 00.55.55l2.02-.21a1.5 1.5 0 00.9-.44L18.7 7.4a1.5 1.5 0 000-2.12l-.7-.7a1.5 1.5 0 00-2.13 0L4.42 16.02z"></path></g></svg>
+                                    <button type="button"
+                                        class="main__task-item-action-btn main__task-item-action-btn--edit">
+                                        <svg width="24" height="24">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <path fill="currentColor" d="M9.5 19h10a.5.5 0 110 1h-10a.5.5 0 110-1z">
+                                                </path>
+                                                <path stroke="currentColor"
+                                                    d="M4.42 16.03a1.5 1.5 0 00-.43.9l-.22 2.02a.5.5 0 00.55.55l2.02-.21a1.5 1.5 0 00.9-.44L18.7 7.4a1.5 1.5 0 000-2.12l-.7-.7a1.5 1.5 0 00-2.13 0L4.42 16.02z">
+                                                </path>
+                                            </g>
+                                        </svg>
                                     </button>
-                                    <button type="button" class="main__task-item-action-btn main-task-item-action-btn--delete">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><rect width="14" height="1" x="5" y="6" fill="currentColor" rx=".5"></rect><path fill="currentColor" d="M10 9h1v8h-1V9zm3 0h1v8h-1V9z"></path><path stroke="currentColor" d="M17.5 6.5h-11V18A1.5 1.5 0 0 0 8 19.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5zm-9 0h7V5A1.5 1.5 0 0 0 14 3.5h-4A1.5 1.5 0 0 0 8.5 5v1.5z"></path></g></svg>
+                                    <button type="button"
+                                        class="main__task-item-action-btn main-task-item-action-btn--delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <path d="M0 0h24v24H0z"></path>
+                                                <rect width="14" height="1" x="5" y="6" fill="currentColor" rx=".5">
+                                                </rect>
+                                                <path fill="currentColor" d="M10 9h1v8h-1V9zm3 0h1v8h-1V9z"></path>
+                                                <path stroke="currentColor"
+                                                    d="M17.5 6.5h-11V18A1.5 1.5 0 0 0 8 19.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5zm-9 0h7V5A1.5 1.5 0 0 0 14 3.5h-4A1.5 1.5 0 0 0 8.5 5v1.5z">
+                                                </path>
+                                            </g>
+                                        </svg>
                                     </button>
                                 </div>
                             </li>
+                            <li class="main__task-editor">
+                                <button class="main__task-editor-btn main__task-editor-action-btn--add">
+                                    <span class="main__task-editor-action-btn-symbol">
+                                        <svg width="13" height="13">
+                                            <path
+                                                d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
+                                                fill="currentColor" fill-rule="evenodd"></path>
+                                        </svg> </span>Add Task
+                                </button>
+                            </li>
+                            <!-- <li class="main__task-editor">
+                                <form class="task-editor-form">
+                                    <div class="task-editor-form__body">
+                                        <input class="task-editor-form__control" type="text"
+                                            placeholder="Title: 100DaysOfCode" />
+                                        <textarea class="task-editor-form__control" name="" id="" cols="30" rows="3"
+                                            placeholder="Description: eg. Code daily at least 1-hour for 100Days"></textarea>
+                                        <div class="task-editor-form__extra_fields">
+                                            <input
+                                                class="task-editor-form__control task-editor-form__control--datepicker"
+                                                name="" id="" type="date" placeholder="Due Date" />
+                                        </div>
+                                    </div>
+                                    <div class="task-editor-form__footer">
+                                        <button class="task-editor-form__action-btn task-editor-form__action-btn--add">
+                                            Add task
+                                        </button>
+                                        <button
+                                            class="task-editor-form__action-btn task-editor-form__action-btn--cancel">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -137,19 +213,23 @@
         </footer>
 
         <div class="modal modal--close">
-            <form class="modal__form">
+            <form class="modal__form modal__form--add-project">
                 <header class="modal__form-header">
                     <h3>Add Project</h3>
                 </header>
                 <section class="modal__form-body">
                     <div class="modal__form-field">
                         <label for="" class="modal__form-field-name">Project name</label>
-                        <input type="text" class="modal__form-field-control">
+                        <input type="text" class="modal__form-field-control" />
                     </div>
                 </section>
                 <footer class="modal__form-footer">
-                    <button type="button" class="modal__form-action-btn modal__form-action-btn--cancel">Cancel</button>
-                    <button type="submit" class="modal__form-action-btn modal__form-action-btn--add">Add</button>
+                    <button type="button" class="modal__form-action-btn modal__form-action-btn--cancel">
+                        Cancel
+                    </button>
+                    <button type="submit" class="modal__form-action-btn modal__form-action-btn--add">
+                        Add
+                    </button>
                 </footer>
             </form>
         </div>
@@ -158,78 +238,204 @@
     <script src="main.js"></script>
 
     <script>
-        const hamburgerBtnEl = document.querySelector('.header__hamburger-btn');
-        const sidenavEl = document.querySelector('.sidenav');
-        const sidenavExpandabletoggleEL = document.querySelector('.sidenav__expandable-toggle');
-        const sidenavExpandableListEl = document.querySelector('.sidenav__expandable-list');
-        const sidenavExpandableActionEl = document.querySelector('.sidenav__expandable-action');
-        const modalEl = document.querySelector('.modal');
-        const modalFormEl = document.querySelector('.modal__form');
+        (() => {
+            "use-strict"
+            //Selecting DOM Nodes
+            const hamburgerBtnEl = document.querySelector(".header__hamburger-btn");
+            const sidenavEl = document.querySelector(".sidenav");
+            const sidenavExpandabletoggleEL = document.querySelector(".sidenav__expandable-toggle");
+            const sidenavExpandableListEl = document.querySelector(".sidenav__expandable-list");
+            const sidenavExpandableActionEl = document.querySelector(".sidenav__expandable-action");
+            const modalEl = document.querySelector(".modal");
+            const addProjectModalFormEl = document.querySelector(".modal__form--add-project");
+            const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
 
-        function toggleClassName(el, className) {
-            el.classList.toggle(className);
-        }
+            function _toggleClassName(el, className) {
+                el.classList.toggle(className);
+            }
 
-        hamburgerBtnEl.addEventListener('click', (e) => {
-            toggleClassName(sidenavEl, 'sidenav--active');
-        })
+            function _attachListenerToNode(el,listener,handler){
+                el.addEventListener('click',handler);
+            }
 
-        sidenavExpandabletoggleEL.addEventListener('click', (e) => {
-            toggleClassName(sidenavExpandableListEl, 'sidenav__expandable-list--collapse');
-            // Toggle aria-expanded value
-            sidenavExpandabletoggleEL.getAttribute("aria-expanded") === "true" 
-                ? sidenavExpandabletoggleEL.setAttribute("aria-expanded","false")
-                : sidenavExpandabletoggleEL.setAttribute("aria-expanded","true")
-        })
+            function _showModal(e) {
+                modalEl.classList.remove("modal--close");
+            }
 
-        function handleFormClick(e){
-            e.preventDefault();
+            function _toggleSidenav(){
+                _toggleClassName(sidenavEl, "sidenav--active");
+            } 
+
+            function _toggleSidenavExpandableList(){
+                _toggleClassName(sidenavExpandableListEl,"sidenav__expandable-list--collapse");
+                // Toggle aria-expanded value
+                sidenavExpandabletoggleEL.getAttribute("aria-expanded") === "true" ?
+                    sidenavExpandabletoggleEL.setAttribute("aria-expanded", "false") :
+                    sidenavExpandabletoggleEL.setAttribute("aria-expanded", "true");
+            }
+
+            function _hideTaskEditorAddBtn(){
+                const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
+                taskeditorAddBtnEl.classList.add("main__task-editor-action-btn--hide");
+            }
+
+            function _showTaskeEditorAddBtn(){
+                const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
+                taskeditorAddBtnEl.classList.remove("main__task-editor-action-btn--hide");
+            }
+
+            function _handleTaskEditorFormClick(e) {
+
+                if(!e.target.closest(".task-editor-form__footer")) return;
+
+                const self = this;
+                if ( e.target.className.includes("task-editor-form__action-btn--add")) {
+                    const taskList = document.querySelector(".main__task-list");
+
+                    const taskItem = document.createElement("li");
+                    const taskItemInfo = document.createElement("div");
+                    const taskItemCheck = document.createElement("div");
+                    const taskItemContent = document.createElement("div");
+                    const taskItemDueDate = document.createElement("div");
+                    const taskItemActions = document.createElement("div");
+                    const taskItemEditBtn = document.createElement("button");
+                    const taskItemEditBtnSvg = document.createElement("svg");
+                    const taskItemDeleteBtn = document.createElement("button");
+                    const taskItemDeleteBtnSvg = document.createElement("svg");
+
+                    taskItem.setAttribute("class", "main__task-item");
+                    taskItemInfo.setAttribute("class", "main__task-item-info");
+                    taskItemCheck.setAttribute("class", "main__task-item-check");
+                    taskItemContent.setAttribute("class", "main__task-item-content");
+                    taskItemDueDate.setAttribute("class", "main__task-item-dueDate");
+                    taskItemActions.setAttribute("class", "main__task-item-actions");
+                    taskItemEditBtn.setAttribute("class","main__task-item-action-btn main__task-item-action-btn--edit");
+                    taskItemDeleteBtn.setAttribute("class","main__task-item-action-btn main__task-item-action-btn--delete");
+
+                    taskItemContent.textContent = self.elements[0].value;
+                    taskItemDueDate.textContent = self.elements[2].value;
+
+                    taskItemEditBtn.innerHTML =
+                        '<svg width="24" height="24"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M9.5 19h10a.5.5 0 110 1h-10a.5.5 0 110-1z"></path><path stroke="currentColor" d="M4.42 16.03a1.5 1.5 0 00-.43.9l-.22 2.02a.5.5 0 00.55.55l2.02-.21a1.5 1.5 0 00.9-.44L18.7 7.4a1.5 1.5 0 000-2.12l-.7-.7a1.5 1.5 0 00-2.13 0L4.42 16.02z"></path></g></svg>';
+                    taskItemDeleteBtn.innerHTML =
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><rect width="14" height="1" x="5" y="6" fill="currentColor" rx=".5"></rect><path fill="currentColor" d="M10 9h1v8h-1V9zm3 0h1v8h-1V9z"></path><path stroke="currentColor" d="M17.5 6.5h-11V18A1.5 1.5 0 0 0 8 19.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5zm-9 0h7V5A1.5 1.5 0 0 0 14 3.5h-4A1.5 1.5 0 0 0 8.5 5v1.5z"></path></g></svg>';
+
+                    taskItem.append(taskItemInfo, taskItemActions);
+                    taskItemInfo.append(taskItemCheck,taskItemContent,taskItemDueDate);
+                    taskItemActions.append(taskItemEditBtn, taskItemDeleteBtn);
+                    
+                    taskList.insertBefore(taskItem, taskList.childNodes[0]);
+                } 
+                self.reset();
+                self.remove();
+                _showTaskeEditorAddBtn();
+                e.preventDefault();
+            }
+
+            function _showTaskEditorForm(e) {
+                
+                const self = this;
+                if ( e.target.className.includes("main__task-editor-action-btn--add")) {
+                    const taskEditor = document.querySelector(".main__task-editor");
+
+                    const form = document.createElement("form");
+                    const formBody = document.createElement("div");
+                    const formInputTitle= document.createElement("input");
+                    const formTextarea = document.createElement("textarea");
+                    const formExtraFields = document.createElement("div");
+                    const formInputDatepicker = document.createElement("input");
+                    const formFooter = document.createElement("div");
+                    const formActionBtnAdd = document.createElement("button");
+                    const formActionBtnCancel = document.createElement("button");
+
+                    form.setAttribute("class", "task-editor-form");
+                    formBody.setAttribute("class", "task-editor-form__body");
+                    formInputTitle.setAttribute("class", "task-editor-form__control");
+                    formInputTitle.setAttribute("type", "text");
+                    formInputTitle.setAttribute("placeholder", "Title: 100DaysOfCode");
+
+                    formTextarea.setAttribute("class", "task-editor-form__control");
+                    formTextarea.setAttribute("cols", "30");
+                    formTextarea.setAttribute("rows", "3");
+                    formTextarea.setAttribute("placeholder", "Description: eg. Code daily at least 1-hour for 100Days");
+                    
+                    formExtraFields.setAttribute("class", "task-editor-form__extra_fields");
+                    formInputDatepicker.setAttribute("class", "task-editor-form__control task-editor-form__control--datepicker");
+                    formInputDatepicker.setAttribute("type", "date");
+                    formInputDatepicker.setAttribute("placeholder", "Due Date");
+                    
+                    formFooter.setAttribute("class", "task-editor-form__footer");
+                    formActionBtnAdd.setAttribute("class", "task-editor-form__action-btn task-editor-form__action-btn--add");
+                    formActionBtnCancel.setAttribute("class", "task-editor-form__action-btn task-editor-form__action-btn--cancel");
+
+                    formActionBtnAdd.textContent = "Add Task";
+                    formActionBtnCancel.textContent = "Cancel";
+
+                    form.append(formBody,formFooter);
+                    formBody.append(formInputTitle,formTextarea,formExtraFields);
+                    formExtraFields.append(formInputDatepicker);
+
+                    formFooter.append(formActionBtnAdd,formActionBtnCancel);
+                    
+                    taskEditor.insertBefore(form, taskEditor.childNodes[0]);
+
+                    _hideTaskEditorAddBtn();
+                    _attachListenerToNode(form,'submit',_handleTaskEditorFormClick);
+                } 
+            }
+
+            function _handleAddProjectFormClick(e) {
+                e.preventDefault();
+
+                if (!e.target.closest(".modal")) return;
+
+                if (e.target.className.includes("modal__form-action-btn--cancel")) {
+                    addProjectModalFormEl.reset();
+                    modalEl.classList.add("modal--close");
+
+                } else if ( e.target.className.includes("modal__form-action-btn--add")) {
+
+                    const sidenavExpandableListEl = document.querySelector(".sidenav__expandable-list");
+
+                    const sidenavItem = document.createElement("li");
+                    const sidenavItemIcon = document.createElement("span");
+                    const sidenavItemContent = document.createElement("span");
+                    const sidenavItemCounter = document.createElement("span");
+
+                    sidenavItem.setAttribute("class", "sidenav__item");
+                    sidenavItemIcon.setAttribute("class", "sidenav__item-icon");
+                    sidenavItemContent.setAttribute("class", "sidenav__item-content");
+                    sidenavItemCounter.setAttribute("class", "sidenav__item-counter");
+
+                    sidenavItemContent.textContent = addProjectModalFormEl.elements[0].value;
+
+                    sidenavExpandableListEl.append(sidenavItem);
+                    sidenavItem.append(
+                        sidenavItemIcon,
+                        sidenavItemContent,
+                        sidenavItemCounter
+                    );
+
+                    addProjectModalFormEl.reset();
+                    modalEl.classList.add("modal--close");
+                }
+            }
+
             
-            if(!e.target.closest('.modal'))
-                return;
+            hamburgerBtnEl.addEventListener("click", _toggleSidenav);
+            sidenavExpandabletoggleEL.addEventListener("click", _toggleSidenavExpandableList);
+            sidenavExpandableActionEl.addEventListener("click", _showModal);
+            taskeditorAddBtnEl.addEventListener("click", _showTaskEditorForm);
+            addProjectModalFormEl.addEventListener("click", _handleAddProjectFormClick);
 
-            if(e.target.className.includes('modal__form-action-btn--cancel')){
-                modalFormEl.reset();
-                modalEl.classList.add('modal--close');
-
-            }else if(e.target.className.includes('modal__form-action-btn--add')){
-                const sidenavExpandableListEl = document.querySelector('.sidenav__expandable-list');
-                
-                const sidenavItem = document.createElement('li');
-                const sidenavItemIcon = document.createElement('span');
-                const sidenavItemContent = document.createElement('span');
-                const sidenavItemCounter = document.createElement('span');
-
-                sidenavItem.setAttribute('class','sidenav__item');
-                sidenavItemIcon.setAttribute('class','sidenav__item-icon');
-                sidenavItemContent.setAttribute('class','sidenav__item-content');
-                sidenavItemCounter.setAttribute('class','sidenav__item-counter');
-                
-                sidenavItemContent.textContent = modalFormEl.elements[0].value; 
-
-                sidenavExpandableListEl.append(sidenavItem);
-                sidenavItem.append(sidenavItemIcon,sidenavItemContent,sidenavItemCounter);
-
-                modalFormEl.reset();
-                modalEl.classList.add('modal--close');
-            }
-        }
-
-        function openModal(e){
-            modalEl.classList.remove('modal--close');
-        }
-        
-        sidenavExpandableActionEl.addEventListener('click',openModal);
-        modalFormEl.addEventListener('click',handleFormClick);
-
-        window.addEventListener('DOMContentLoaded', (e) => {
-            const ww = window.innerWidth;
-            /* For Desktop display by default open sideNav*/
-            if (ww > 750) {
-                toggleClassName(sidenavEl, 'sidenav--active');
-            }
-        })
-
+            window.addEventListener("DOMContentLoaded", (e) => {
+                const ww = window.innerWidth;
+                /* For Desktop display by default open sideNav*/
+                if (ww > 750) {
+                    toggleClassName(sidenavEl, "sidenav--active");
+                }
+            });
+        })();
     </script>
 </body>
 
