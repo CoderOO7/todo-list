@@ -133,6 +133,7 @@ ul {
 
 .sidenav__expandable-action{
   cursor: pointer;
+  color: black;
 }
 
 .sidenav__expandable-list{
@@ -162,38 +163,129 @@ ul {
   justify-content: space-between;
   align-items: center;
   border-bottom:2px solid var(--seashell);
+  margin-bottom: 1.4rem;
 }
+
 
 .main__task-header-content{
   display: flex;
   align-items: baseline;
 }
 
+.main__task-header-action-btn{
+  display: flex;
+  align-items: center;
+  font-size: 2.2rem;
+  font-weight: 600;
+  padding-right: 8rem;
+}
+
 .main__task-header-content > *{
   padding: 0.3rem;
 }
-.main__task-list{
-  padding: 1rem 0;
+
+.main__task-item + .main__task-item{
+  border-top: 2px solid var(--seashell);
 }
-.main__task-item{
+
+.main__task-item-info{
   display: flex;
+  flex: 1 0 auto;
   align-items: center;
 }
 
-.main__task-item-content{
-  font-size: 2rem;
-  padding-left: 1rem;
-}
-
-.main__task-item-actions{
+.main__task-item-dueDate{
   flex: 1 0 auto;
   display: flex;
   justify-content: flex-end;
+  padding: 0 2rem;
+}
+
+.main__task-item-actions{
+  display: flex;
+  justify-content: flex-end;
+  width: 8rem;
 }
 
 .main__task-item-actions > * {
   cursor: pointer;
   margin-left: 0.6rem;
+}
+
+.main__task-editor-action-btn--add{
+  flex: 1 0 auto;
+  text-align: left;
+  font-size: 1.8rem;
+  color: grey;
+}
+
+.main__task-editor-action-btn--add:hover{
+  color: inherit;
+}
+
+.main__task-editor-action-btn-symbol{
+  display: inline-flex;
+  padding: 0.2rem;
+  flex: 1 0 auto;
+  color: black;
+}
+
+.main__task-editor-action-btn--add:hover
+.main__task-editor-action-btn-symbol{
+  color: white;
+  border-radius: 50%;
+  background: var(--mine-shaft-light);
+}
+
+.main__task-editor-action-btn--hide{
+  display: none;
+}
+
+/**** task-editor-form ******/
+.task-editor-form{
+  font-size: 1.8rem;
+}
+
+.task-editor-form ,.task-editor-form__body{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.task-editor-form__body{
+  border-radius: 12px;
+  border: 2px solid var(--alto);
+}
+
+.task-editor-form__body,.task-editor-form__footer{
+  padding: 1rem;
+}
+
+.task-editor-form__control{
+  font-size: inherit;
+  margin-bottom: 1rem;
+  border: none;
+  outline: none;
+}
+
+.task-editor-form__control:focus{
+  border: none;
+}
+
+.task-editor-form__control--datepicker{
+  border: 1px solid var(--alto);
+}
+
+.task-editor-form__action-btn{
+  font-size: 1.6rem;
+  padding: 0.6rem;
+}
+.task-editor-form__action-btn--add{
+  background-color: var(--mine-shaft,black) !important;
+  color: white;
+}
+.task-editor-form__action-btn--cancel:hover{
+  text-decoration: underline;
 }
 
 .footer {
@@ -207,6 +299,9 @@ ul {
   z-index: 2;
 }
 
+/*********************
+    Modal styling 
+**********************/
 .modal{
   display: flex;
   flex-direction: column;
@@ -248,7 +343,6 @@ ul {
   padding: 0.6rem 0;
 }
 
-
 .modal__form-field-control{
   width: 100%;
   padding: 0.6rem 1rem;
@@ -259,7 +353,7 @@ ul {
 .modal__form-footer{
   display: flex;
   justify-content: space-between;
-  margin-left: 6rem;
+  margin-left: 40%;
 }
 
 .modal__form-action-btn{
@@ -270,10 +364,15 @@ ul {
 .modal__form-action-btn ~ .modal__form-action-btn{
   margin-left: 1rem;
 }
-/* Common Styling */
+
+/******************
+   Common Styling 
+*******************/
 .header__btn, .sidenav__btn,
 .main__task-item-action-btn,
-.main__task-header-action-btn{
+.main__task-header-action-btn,
+.main__task-editor-btn,
+.task-editor-form__action-btn{
   cursor: pointer;
   border: none;
   outline:none;
@@ -283,7 +382,8 @@ ul {
 .sidenav__item,
 .main__task-item-check,
 .main__task-item-content,
-.modal__form-action-btn{
+.modal__form-action-btn,
+.task-editor-form__action-btn{
   cursor: pointer;
 }
 
@@ -305,6 +405,23 @@ ul {
   padding: 0.6rem;
   border-radius: 50%;
   border: 1px solid black;  
+}
+
+.main__task-item-content,
+.main__task-item-dueDate{
+  font-size: 2rem;
+}
+
+.main__task-item,
+.main__task-editor{
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.main__task-item-check,
+.main__task-editor-action-btn-symbol{
+  margin-right: 1rem;
 }
 
 .modal__form-header,.modal__form-body{
