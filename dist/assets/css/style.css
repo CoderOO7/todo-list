@@ -316,7 +316,7 @@ ul {
   z-index: 9999;
 }
 
-.modal--close{
+.modal--close,.modal__item--close{
   display: none;
 }
 
