@@ -1,3 +1,4 @@
+import {createProjectItemListener, createTodoTaskBtnListener} from './dynamicEventsListeners.js';
 import {projectController} from './logic/projects.js';
 import {todoController} from './logic/todos.js'; 
 import {format} from 'date-fns';
@@ -15,14 +16,15 @@ const renderDom = (function(){
         _clearNode(sidenavExpandableListEl);
         
         const projectArr = projectController.getProjectsList();
-        projectArr.forEach((project)=>{
+        projectArr.forEach((project,idx)=>{
             
             const sidenavItem = document.createElement("li");
             const sidenavItemIcon = document.createElement("span");
             const sidenavItemContent = document.createElement("span");
             const sidenavItemCounter = document.createElement("span");
     
-            sidenavItem.setAttribute("class", "sidenav__item");
+            sidenavItem.setAttribute("class", "sidenav__item sidenav__item-project");
+            sidenavItem.setAttribute("data-index", idx);
             sidenavItemIcon.setAttribute("class", "sidenav__item-icon");
             sidenavItemContent.setAttribute("class", "sidenav__item-content");
             sidenavItemCounter.setAttribute("class", "sidenav__item-counter");
@@ -35,17 +37,18 @@ const renderDom = (function(){
                 sidenavItemContent,
                 sidenavItemCounter
             );
+
+            createProjectItemListener(sidenavItem);
         })
     }
 
-    function todos(){
 
-        const taskEditorForm = document.querySelector(".task-editor-form"); 
+    function todos(_activeProjectId = null){
         const taskList = document.querySelector(".main__task-list");
         _clearNode(taskList);
 
-        const todosArr = todoController.getTodosList();
-        todosArr.forEach((todoTask)=>{
+        const todosArr = todoController.getTodosList(_activeProjectId);
+        todosArr.forEach((todoTask,idx)=>{
 
             const taskItem = document.createElement("li");
             const taskItemInfo = document.createElement("div");
@@ -57,6 +60,7 @@ const renderDom = (function(){
             const taskItemDeleteBtn = document.createElement("button");
     
             taskItem.setAttribute("class", "main__task-item");
+            taskItem.setAttribute("data-index",idx);
             taskItemInfo.setAttribute("class", "main__task-item-info");
             taskItemCheck.setAttribute("class", "main__task-item-check");
             taskItemContent.setAttribute("class", "main__task-item-content");
@@ -78,6 +82,8 @@ const renderDom = (function(){
             taskItemActions.append(taskItemEditBtn, taskItemDeleteBtn);
             
             taskList.append(taskItem);
+
+            createTodoTaskBtnListener(taskItemEditBtn,taskItemDeleteBtn);
         })
        
     }

@@ -1,4 +1,4 @@
-import { createTodoTaskEditFormBtnListener } from './dynamicEventsListeners.js';
+import { createTodoTaskEditFormBtnListener} from './dynamicEventsListeners.js';
 import {projectController} from './logic/projects.js';
 import {todoController} from './logic/todos.js';
 import {renderDom} from './render.js';
@@ -35,6 +35,14 @@ const DOMStuff = (function () {
       ".modal__form-action-btn--cancel-project"
     );
 
+    function _highlightActiveProjectTab(_currentActiveProjectEl){
+      const _prevActiveProjectEl = document.querySelector(".sidenav__item-project--active");
+      if(_prevActiveProjectEl){
+        _prevActiveProjectEl.classList.remove("sidenav__item-project--active");
+      }
+      _currentActiveProjectEl.classList.add("sidenav__item-project--active");
+    }
+
     function showModal(event) {
       _showBaseModal();
       _addProjectModalEl.classList.remove("modal__item--close");
@@ -49,7 +57,7 @@ const DOMStuff = (function () {
     function addProject(event) {
       event.preventDefault();
       
-      const _projectName = _addProjectModalFormEl.elements[0].value;
+      const _projectName = _addProjectModalFormEl.elements.projectName.value;
       if(_projectName !== ''){
         projectController.create(_projectName);
         renderDom.projects();
@@ -60,10 +68,20 @@ const DOMStuff = (function () {
       }
     }
 
+    function activateProject(event){
+      const _activeProjectEl = event.currentTarget;
+      const _activeProjectIdx = _activeProjectEl.dataset.index;
+      
+      _highlightActiveProjectTab(_activeProjectEl);
+      projectController.setActiveProject(_activeProjectIdx);
+      renderDom.todos(projectController.getActiveProject().id);
+    }
+
     return {
       showModal,
       closeModal,
       addProject,
+      activateProject,
       showModalBtnEl,
       addProjectModalFormBtnEl,
       cancelProjectModalFormBtnEl,
@@ -131,20 +149,32 @@ const DOMStuff = (function () {
       event.preventDefault();
       const _taskEditorForm = document.querySelector(".task-editor-form");
 
-      const title = _taskEditorForm.elements.title.value;
-      const description = _taskEditorForm.elements.description.value;
-      const dueDate = _taskEditorForm.elements.dueDate.value;
-
-      todoController.create(1,title,description,dueDate);
-      renderDom.todos();
+      const _title = _taskEditorForm.elements.title.value;
+      const _description = _taskEditorForm.elements.description.value;
+      const _dueDate = _taskEditorForm.elements.dueDate.value;
+      const _activeProjectId = projectController.getActiveProject().id;
+      
+      todoController.create(_activeProjectId,_title,_description,_dueDate);
+      renderDom.todos(_activeProjectId);
       closeTaskEditorForm(_taskEditorForm);
     }
+
+    function deleteTodoTask(event){
+
+    }
+
+    function editTodoTask(event){
+      
+    }
+
 
     return {
       taskeditorAddBtnEl,
       renderTaskEditorForm,
       addTodoTask,
       closeTaskEditorForm,
+      editTodoTask,
+      deleteTodoTask,
     };
   })();
 

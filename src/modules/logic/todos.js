@@ -1,5 +1,5 @@
 const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
-    const id = +Date.now();
+    const id = '' + Date.now();
     const projectId = activeProjectId;
     return {
         id,
@@ -18,8 +18,12 @@ const todoController = (function(){
         console.log(_todoTaskStore);
     }
 
-    function getTodosList(){
-        return _todoTaskStore.slice();
+    function getTodosList(activeProjectId = null){
+        if(activeProjectId == null){
+            return _todoTaskStore.slice();
+        }else{
+            return _todoTaskStore.filter(todoTask=>todoTask.projectId === activeProjectId);
+        }
     }
 
     function create(activeProjectId,title,description,date){
