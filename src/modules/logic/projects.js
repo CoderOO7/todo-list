@@ -9,7 +9,6 @@ const projectController = (function(){
 
     function _addProjectToStore(project){
         _projectStore.push(project);
-        console.log(_projectStore)
     }
 
     function getProjectsList(){

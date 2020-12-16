@@ -284,7 +284,8 @@ ul {
   font-size: 1.6rem;
   padding: 0.6rem;
 }
-.task-editor-form__action-btn--add{
+.task-editor-form__action-btn--add,
+.task-editor-form__action-btn--save{
   background-color: var(--mine-shaft,black) !important;
   color: white;
 }

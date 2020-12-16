@@ -1,4 +1,4 @@
-import {createProjectItemListener, createTodoTaskBtnListener} from './dynamicEventsListeners.js';
+import {createProjectItemListener, createTodoTaskBtnListener,createTodoTaskEditFormBtnListener} from './dynamicEventsListeners.js';
 import {projectController} from './logic/projects.js';
 import {todoController} from './logic/todos.js'; 
 import {format} from 'date-fns';
@@ -48,7 +48,7 @@ const renderDom = (function(){
         _clearNode(taskList);
 
         const todosArr = todoController.getTodosList(_activeProjectId);
-        todosArr.forEach((todoTask,idx)=>{
+        todosArr.forEach((todoTask)=>{
 
             const taskItem = document.createElement("li");
             const taskItemInfo = document.createElement("div");
@@ -60,7 +60,7 @@ const renderDom = (function(){
             const taskItemDeleteBtn = document.createElement("button");
     
             taskItem.setAttribute("class", "main__task-item");
-            taskItem.setAttribute("data-index",idx);
+            taskItem.setAttribute("data-todo-task-id",todoTask.id);
             taskItemInfo.setAttribute("class", "main__task-item-info");
             taskItemCheck.setAttribute("class", "main__task-item-check");
             taskItemContent.setAttribute("class", "main__task-item-content");
@@ -88,66 +88,89 @@ const renderDom = (function(){
        
     }
 
-    function todoTaskEditForm(){
-            const taskEditor = document.querySelector(".main__task-editor");
-            const todayDate = format(new Date(),'yyyy-MM-dd');
+    function todoTaskEditForm(todoTaskId = null){
 
-            const form = document.createElement("form");
-            const formBody = document.createElement("div");
-            const formInputTitle = document.createElement("input");
-            const formTextarea = document.createElement("textarea");
-            const formExtraFields = document.createElement("div");
-            const formInputDatepicker = document.createElement("input");
-            const formFooter = document.createElement("div");
-            const formActionBtnAdd = document.createElement("button");
-            const formActionBtnCancel = document.createElement("button");
-    
-            form.setAttribute("class", "task-editor-form");
-            formBody.setAttribute("class", "task-editor-form__body");
-            formInputTitle.setAttribute("class", "task-editor-form__control");
-            formInputTitle.setAttribute("type", "text");
-            formInputTitle.setAttribute("name", "title");
-            formInputTitle.setAttribute("placeholder", "Title: 100DaysOfCode");
-    
-            formTextarea.setAttribute("class", "task-editor-form__control");
-            formTextarea.setAttribute("name", "description");
-            formTextarea.setAttribute("cols", "30");
-            formTextarea.setAttribute("rows", "3");
-            formTextarea.setAttribute(
-              "placeholder",
-              "Description: eg. Code daily at least 1-hour for 100Days"
-            );
-    
-            formExtraFields.setAttribute("class", "task-editor-form__extra_fields");
-            formInputDatepicker.setAttribute(
-              "class",
-              "task-editor-form__control task-editor-form__control--datepicker"
-            );
-            formInputDatepicker.setAttribute("type", "date");
-            formInputDatepicker.setAttribute("name", "dueDate");
-            formInputDatepicker.setAttribute("placeholder", "Due Date");
-            formInputDatepicker.setAttribute("value", `${todayDate}`);
-            
-            formFooter.setAttribute("class", "task-editor-form__footer");
-            formActionBtnAdd.setAttribute(
-              "class",
-              "task-editor-form__action-btn task-editor-form__action-btn--add"
-            );
-            formActionBtnCancel.setAttribute(
-              "class",
-              "task-editor-form__action-btn task-editor-form__action-btn--cancel"
-            );
-    
-            formActionBtnAdd.textContent = "Add Task";
-            formActionBtnCancel.textContent = "Cancel";
-    
-            form.append(formBody, formFooter);
-            formBody.append(formInputTitle, formTextarea, formExtraFields);
-            formExtraFields.append(formInputDatepicker);
-    
+        const taskEditor = document.querySelector(".main__task-editor");
+        const taskList = document.querySelector(".main__task-list");
+        
+        const todayDate = format(new Date(),'yyyy-MM-dd');
+
+        const form = document.createElement("form");
+        const formBody = document.createElement("div");
+        const formInputTitle = document.createElement("input");
+        const formTextarea = document.createElement("textarea");
+        const formExtraFields = document.createElement("div");
+        const formInputDatepicker = document.createElement("input");
+        const formFooter = document.createElement("div");
+        const formActionBtnAdd = document.createElement("button");
+        const formActionBtnSave = document.createElement("button");
+        const formActionBtnCancel = document.createElement("button");
+
+        form.setAttribute("class", "task-editor-form");
+        formBody.setAttribute("class", "task-editor-form__body");
+        formInputTitle.setAttribute("class", "task-editor-form__control");
+        formInputTitle.setAttribute("type", "text");
+        formInputTitle.setAttribute("name", "title");
+        formInputTitle.setAttribute("placeholder", "Title: 100DaysOfCode");
+
+        formTextarea.setAttribute("class", "task-editor-form__control");
+        formTextarea.setAttribute("name", "description");
+        formTextarea.setAttribute("cols", "30");
+        formTextarea.setAttribute("rows", "3");
+        formTextarea.setAttribute(
+            "placeholder",
+            "Description: eg. Code daily at least 1-hour for 100Days"
+        );
+
+        formExtraFields.setAttribute("class", "task-editor-form__extra_fields");
+        formInputDatepicker.setAttribute(
+            "class",
+            "task-editor-form__control task-editor-form__control--datepicker"
+        );
+        formInputDatepicker.setAttribute("type", "date");
+        formInputDatepicker.setAttribute("name", "dueDate");
+        formInputDatepicker.setAttribute("placeholder", "Due Date");
+        formInputDatepicker.setAttribute("value", `${todayDate}`);
+        
+        formFooter.setAttribute("class", "task-editor-form__footer");
+        formActionBtnAdd.setAttribute(
+            "class",
+            "task-editor-form__action-btn task-editor-form__action-btn--add"
+        );
+        formActionBtnSave.setAttribute(
+            "class",
+            "task-editor-form__action-btn task-editor-form__action-btn--save"
+        );
+        formActionBtnCancel.setAttribute(
+            "class",
+            "task-editor-form__action-btn task-editor-form__action-btn--cancel"
+        );
+        formActionBtnCancel.setAttribute("type","button");
+
+        formActionBtnAdd.textContent = "Add Task";
+        formActionBtnSave.textContent = "Save";
+        formActionBtnCancel.textContent = "Cancel";
+
+        form.append(formBody, formFooter);
+        formBody.append(formInputTitle, formTextarea, formExtraFields);
+        formExtraFields.append(formInputDatepicker);
+        
+        // Populate the form fields with saved values
+        if(todoTaskId !== null && todoTaskId !== undefined){
+            const todoTaskEl = document.querySelector(`[data-todo-task-id="${todoTaskId}"]`);
+            const todoTask = todoController.getTodoTask(todoTaskId);
+            formInputTitle.value = todoTask.title;
+            formTextarea.value = todoTask.description;
+            formInputDatepicker.value = todoTask.dueDate;
+
+            formFooter.append(formActionBtnSave, formActionBtnCancel);
+            taskList.replaceChild(form,todoTaskEl);
+        }else{
             formFooter.append(formActionBtnAdd, formActionBtnCancel);
-            
             taskEditor.append(form);
+        }
+        
+        createTodoTaskEditFormBtnListener();
     }
 
     return{projects,todoTaskEditForm,todos}

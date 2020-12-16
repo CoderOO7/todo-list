@@ -1,7 +1,7 @@
-import { createTodoTaskEditFormBtnListener} from './dynamicEventsListeners.js';
-import {projectController} from './logic/projects.js';
-import {todoController} from './logic/todos.js';
-import {renderDom} from './render.js';
+import { createTodoTaskEditFormBtnListener } from './dynamicEventsListeners.js';
+import { projectController } from './logic/projects.js';
+import { todoController } from './logic/todos.js';
+import { renderDom } from './render.js';
 
 const DOMStuff = (function () {
   const modalEl = document.querySelector(".modal");
@@ -35,9 +35,9 @@ const DOMStuff = (function () {
       ".modal__form-action-btn--cancel-project"
     );
 
-    function _highlightActiveProjectTab(_currentActiveProjectEl){
+    function _highlightActiveProjectTab(_currentActiveProjectEl) {
       const _prevActiveProjectEl = document.querySelector(".sidenav__item-project--active");
-      if(_prevActiveProjectEl){
+      if (_prevActiveProjectEl) {
         _prevActiveProjectEl.classList.remove("sidenav__item-project--active");
       }
       _currentActiveProjectEl.classList.add("sidenav__item-project--active");
@@ -56,22 +56,22 @@ const DOMStuff = (function () {
 
     function addProject(event) {
       event.preventDefault();
-      
+
       const _projectName = _addProjectModalFormEl.elements.projectName.value;
-      if(_projectName !== ''){
+      if (_projectName !== '') {
         projectController.create(_projectName);
         renderDom.projects();
         closeModal();
-      }else{
+      } else {
         //TODO error_message modal
         alert("Please, don't leave field blank");
       }
     }
 
-    function activateProject(event){
+    function activateProject(event) {
       const _activeProjectEl = event.currentTarget;
       const _activeProjectIdx = _activeProjectEl.dataset.index;
-      
+
       _highlightActiveProjectTab(_activeProjectEl);
       projectController.setActiveProject(_activeProjectIdx);
       renderDom.todos(projectController.getActiveProject().id);
@@ -122,7 +122,7 @@ const DOMStuff = (function () {
   })();
 
   const todoTaskDom = (() => {
-    
+
     const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
 
     function _hideTaskEditorAddBtn() {
@@ -133,44 +133,92 @@ const DOMStuff = (function () {
       taskeditorAddBtnEl.classList.remove("main__task-editor-action-btn--hide");
     }
 
-    function closeTaskEditorForm(form) {
-      form.reset();
-      form.remove();
+    function _getTaskEditorFormData(_taskEditorForm) {
+      const data = {};
+
+      data.title = _taskEditorForm.elements.title.value;
+      data.description = _taskEditorForm.elements.description.value;
+      data.dueDate = _taskEditorForm.elements.dueDate.value;
+
+      return data;
+    }
+
+    function closeTaskEditorForm(event) {
+      const _taskEditorForm = document.querySelector(".task-editor-form");
+      _taskEditorForm.reset();
+      _taskEditorForm.remove();
       _showTaskEditorAddBtn();
     }
 
     function renderTaskEditorForm(event) {
       renderDom.todoTaskEditForm();
       _hideTaskEditorAddBtn();
-      createTodoTaskEditFormBtnListener();
+    }
+
+    function renderPopulatedTaskEditorForm(event){
+      const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
+      todoController.setActiveTodoTaskId(_todoTaskId);
+      renderDom.todoTaskEditForm(_todoTaskId);
+      _hideTaskEditorAddBtn();
     }
 
     function addTodoTask(event) {
       event.preventDefault();
+
       const _taskEditorForm = document.querySelector(".task-editor-form");
-
-      const _title = _taskEditorForm.elements.title.value;
-      const _description = _taskEditorForm.elements.description.value;
-      const _dueDate = _taskEditorForm.elements.dueDate.value;
+      const _taskEditorFormData = _getTaskEditorFormData(_taskEditorForm);
       const _activeProjectId = projectController.getActiveProject().id;
-      
-      todoController.create(_activeProjectId,_title,_description,_dueDate);
+
+      todoController.create(
+        _activeProjectId,
+        _taskEditorFormData.title,
+        _taskEditorFormData.description,
+        _taskEditorFormData.dueDate
+      );
       renderDom.todos(_activeProjectId);
-      closeTaskEditorForm(_taskEditorForm);
+      closeTaskEditorForm();
     }
 
-    function deleteTodoTask(event){
+    function deleteTodoTask(event) {
+      const todoTaskEl = event.currentTarget.parentNode.parentNode;
 
+      if (todoTaskEl.className === "main__task-item") {
+        const _isDeleted = todoController.remove(todoTaskEl.dataset.todoTaskId);
+        if (_isDeleted) {
+          console.log("%cTodo is deleted succussfully", "color:green");
+          renderDom.todos(projectController.getActiveProject().id);
+        }
+        else
+          console.error("Due to technincal error unable to delete the todo");
+      }
     }
 
-    function editTodoTask(event){
-      
+    function editTodoTask(event) {
+      event.preventDefault();
+
+      const _taskEditorForm = document.querySelector(".task-editor-form");
+      const _todoTaskId = todoController.getActiveTodoTaskId();
+      const _activeProjectId = projectController.getActiveProject().id;
+
+      const _taskEditorFormData = _getTaskEditorFormData(_taskEditorForm);
+      const _isUpdated = todoController.update(
+        _todoTaskId,
+        _taskEditorFormData.title,
+        _taskEditorFormData.description,
+        _taskEditorFormData.dueDate
+      );
+      if(_isUpdated){
+        console.log("%cTodo is updated succussfully", "color:green");
+        closeTaskEditorForm();
+      }
+      renderDom.todos(_activeProjectId);
     }
 
 
     return {
       taskeditorAddBtnEl,
       renderTaskEditorForm,
+      renderPopulatedTaskEditorForm,
       addTodoTask,
       closeTaskEditorForm,
       editTodoTask,

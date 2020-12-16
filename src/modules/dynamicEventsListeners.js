@@ -2,7 +2,7 @@ import { todoTaskDom, projectDom } from './domStuff.js';
 import { renderDom } from './render.js';
 
 function createTodoTaskBtnListener(todoEditBtnEl,todoDeleteBtnEl) {
-    todoEditBtnEl.addEventListener("click", todoTaskDom.editTodoTask, false);
+    todoEditBtnEl.addEventListener("click", todoTaskDom.renderPopulatedTaskEditorForm, false);
     todoDeleteBtnEl.addEventListener("click", todoTaskDom.deleteTodoTask, false);
 }
 
@@ -12,9 +12,14 @@ function createProjectItemListener(projectItemEl) {
 
 function createTodoTaskEditFormBtnListener() {
     const taskeditorFormAddBtnEl = document.querySelector(".task-editor-form__action-btn--add");
+    const taskeditorFormSaveBtnEl = document.querySelector(".task-editor-form__action-btn--save");
     const taskeditorFormCancelBtnEl = document.querySelector(".task-editor-form__action-btn--cancel");
 
-    taskeditorFormAddBtnEl.addEventListener('click', todoTaskDom.addTodoTask);
+    if(taskeditorFormAddBtnEl){
+        taskeditorFormAddBtnEl.addEventListener('click', todoTaskDom.addTodoTask);
+    }else{
+        taskeditorFormSaveBtnEl.addEventListener('click',todoTaskDom.editTodoTask);
+    }
     taskeditorFormCancelBtnEl.addEventListener('click', todoTaskDom.closeTaskEditorForm);
 }
 
