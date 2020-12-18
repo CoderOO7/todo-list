@@ -57,7 +57,7 @@ const DOMStuff = (function () {
     function addProject(event) {
       event.preventDefault();
 
-      const _projectName = _addProjectModalFormEl.elements.projectName.value;
+      const _projectName = _addProjectModalFormEl.elements.projectName.value.trim();
       if (_projectName !== '') {
         projectController.create(_projectName);
         renderDom.projects();
@@ -136,8 +136,8 @@ const DOMStuff = (function () {
     function _getTaskEditorFormData(_taskEditorForm) {
       const data = {};
 
-      data.title = _taskEditorForm.elements.title.value;
-      data.description = _taskEditorForm.elements.description.value;
+      data.title = _taskEditorForm.elements.title.value.trim();
+      data.description = _taskEditorForm.elements.description.value.trim();
       data.dueDate = _taskEditorForm.elements.dueDate.value;
 
       return data;
@@ -145,9 +145,11 @@ const DOMStuff = (function () {
 
     function closeTaskEditorForm(event) {
       const _taskEditorForm = document.querySelector(".task-editor-form");
+      const _activeProjectId = projectController.getActiveProject().id;
       _taskEditorForm.reset();
       _taskEditorForm.remove();
       _showTaskEditorAddBtn();
+      renderDom.todos(_activeProjectId);
     }
 
     function renderTaskEditorForm(event) {
@@ -175,7 +177,6 @@ const DOMStuff = (function () {
         _taskEditorFormData.description,
         _taskEditorFormData.dueDate
       );
-      renderDom.todos(_activeProjectId);
       closeTaskEditorForm();
     }
 
@@ -198,8 +199,6 @@ const DOMStuff = (function () {
 
       const _taskEditorForm = document.querySelector(".task-editor-form");
       const _todoTaskId = todoController.getActiveTodoTaskId();
-      const _activeProjectId = projectController.getActiveProject().id;
-
       const _taskEditorFormData = _getTaskEditorFormData(_taskEditorForm);
       const _isUpdated = todoController.update(
         _todoTaskId,
@@ -211,7 +210,6 @@ const DOMStuff = (function () {
         console.log("%cTodo is updated succussfully", "color:green");
         closeTaskEditorForm();
       }
-      renderDom.todos(_activeProjectId);
     }
 
 
@@ -225,7 +223,7 @@ const DOMStuff = (function () {
       deleteTodoTask,
     };
   })();
-
+  
   return { projectDom, sidenavDom, todoTaskDom };
 })();
 
