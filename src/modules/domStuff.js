@@ -60,7 +60,7 @@ const DOMStuff = (function () {
       const _projectName = _addProjectModalFormEl.elements.projectName.value.trim();
       if (_projectName !== '') {
         projectController.create(_projectName);
-        renderDom.projects();
+        renderDom.project.list();
         closeModal();
       } else {
         //TODO error_message modal
@@ -74,7 +74,7 @@ const DOMStuff = (function () {
 
       _highlightActiveProjectTab(_activeProjectEl);
       projectController.setActiveProject(_activeProjectIdx);
-      renderDom.todos(projectController.getActiveProject().id);
+      renderDom.todo.list(projectController.getActiveProject().id);
     }
 
     return {
@@ -149,18 +149,18 @@ const DOMStuff = (function () {
       _taskEditorForm.reset();
       _taskEditorForm.remove();
       _showTaskEditorAddBtn();
-      renderDom.todos(_activeProjectId);
+      renderDom.todo.list(_activeProjectId);
     }
 
     function renderTaskEditorForm(event) {
-      renderDom.todoTaskEditForm();
+      renderDom.todo.taskEditForm();
       _hideTaskEditorAddBtn();
     }
 
     function renderPopulatedTaskEditorForm(event){
       const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
       todoController.setActiveTodoTaskId(_todoTaskId);
-      renderDom.todoTaskEditForm(_todoTaskId);
+      renderDom.todo.taskEditForm(_todoTaskId);
       _hideTaskEditorAddBtn();
     }
 
@@ -187,7 +187,7 @@ const DOMStuff = (function () {
         const _isDeleted = todoController.remove(todoTaskEl.dataset.todoTaskId);
         if (_isDeleted) {
           console.log("%cTodo is deleted succussfully", "color:green");
-          renderDom.todos(projectController.getActiveProject().id);
+          renderDom.todo.list(projectController.getActiveProject().id);
         }
         else
           console.error("Due to technincal error unable to delete the todo");
@@ -222,6 +222,16 @@ const DOMStuff = (function () {
       editTodoTask,
       deleteTodoTask,
     };
+  })();
+
+  const mainHeaderDom = (()=>{
+    function ProjectHeader(event){
+
+    }
+
+    function TodayHeader(event){
+
+    }
   })();
   
   return { projectDom, sidenavDom, todoTaskDom };
