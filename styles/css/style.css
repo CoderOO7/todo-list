@@ -176,6 +176,14 @@ ul {
   align-items: baseline;
 }
 
+.main__task-header-content > *{
+  padding: 0.3rem;
+}
+
+.main__task-header-content:first-child:hover{
+  cursor: pointer;
+}
+
 .main__task-header-action-btn{
   display: flex;
   align-items: center;
@@ -184,9 +192,6 @@ ul {
   padding-right: 8rem;
 }
 
-.main__task-header-content > *{
-  padding: 0.3rem;
-}
 
 .main__task-item + .main__task-item{
   border-top: 2px solid var(--seashell);
@@ -245,6 +250,16 @@ ul {
   display: none;
 }
 
+/**** main-header-edit-form ******/
+.header-edit-form__control{
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.header-edit-form__footer{
+  margin-top:1rem;
+}
+
 /**** task-editor-form ******/
 .task-editor-form{
   font-size: 1.8rem;
@@ -278,19 +293,6 @@ ul {
 
 .task-editor-form__control--datepicker{
   border: 1px solid var(--alto);
-}
-
-.task-editor-form__action-btn{
-  font-size: 1.6rem;
-  padding: 0.6rem;
-}
-.task-editor-form__action-btn--add,
-.task-editor-form__action-btn--save{
-  background-color: var(--mine-shaft,black) !important;
-  color: white;
-}
-.task-editor-form__action-btn--cancel:hover{
-  text-decoration: underline;
 }
 
 .footer {
@@ -373,10 +375,12 @@ ul {
 /******************
    Common Styling 
 *******************/
-.header__btn, .sidenav__btn,
+.header__btn, 
+.sidenav__btn,
 .main__task-item-action-btn,
 .main__task-header-action-btn,
 .main__task-editor-btn,
+.header-edit-form__action-btn,
 .task-editor-form__action-btn{
   cursor: pointer;
   border: none;
@@ -427,6 +431,24 @@ ul {
 .main__task-item-check,
 .main__task-editor-action-btn-symbol{
   margin-right: 1rem;
+}
+
+.header-edit-form__action-btn,
+.task-editor-form__action-btn{
+  font-size: 1.6rem;
+  padding: 0.6rem;
+}
+
+.header-edit-form__action-btn--save,
+.task-editor-form__action-btn--add,
+.task-editor-form__action-btn--save{
+  background-color: var(--mine-shaft,black) !important;
+  color: white;
+}
+
+.header-edit-form__action-btn--cancel:hover,
+.task-editor-form__action-btn--cancel:hover{
+  text-decoration: underline;
 }
 
 .modal__form-header,.modal__form-body{
