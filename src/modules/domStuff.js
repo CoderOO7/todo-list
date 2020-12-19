@@ -74,6 +74,7 @@ const DOMStuff = (function () {
 
       _highlightActiveProjectTab(_activeProjectEl);
       projectController.setActiveProject(_activeProjectIdx);
+      renderDom.project.header();
       renderDom.todo.list(projectController.getActiveProject().id);
     }
 
@@ -86,6 +87,38 @@ const DOMStuff = (function () {
       addProjectModalFormBtnEl,
       cancelProjectModalFormBtnEl,
     };
+  })();
+
+  const projectHeaderDom = (()=>{
+
+    function renderEditHeaderForm(event){
+      renderDom.project.editHeaderForm();
+    }
+
+    function submitForm(event){
+      event.preventDefault();
+
+      const _formEl  = document.querySelector(".header-edit-form");
+      //fetch form fields value
+      const _name = _formEl.elements.name.value;
+      if(projectController.updateActiveProject(_name)){
+        renderDom.project.header();
+        renderDom.project.list();
+        console.log("%cProject is updated succussfully", "color:green");
+      }else{
+        console.error("Due to technical error unable to update the project");
+      };
+    }
+
+    function cancelForm(event){
+      const _formEl  = document.querySelector(".header-edit-form");
+
+      _formEl.reset();
+      _formEl.remove();
+      renderDom.project.header();
+    }
+
+    return {renderEditHeaderForm,submitForm,cancelForm}
   })();
 
   const sidenavDom = (() => {
@@ -234,7 +267,7 @@ const DOMStuff = (function () {
     }
   })();
   
-  return { projectDom, sidenavDom, todoTaskDom };
+  return { projectDom, projectHeaderDom, sidenavDom, todoTaskDom };
 })();
 
-export const { projectDom, sidenavDom, todoTaskDom } = DOMStuff;
+export const { projectDom, projectHeaderDom, sidenavDom, todoTaskDom } = DOMStuff;

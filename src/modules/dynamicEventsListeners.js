@@ -1,4 +1,4 @@
-import { todoTaskDom, projectDom } from './domStuff.js';
+import { todoTaskDom, projectDom, projectHeaderDom } from './domStuff.js';
 import { renderDom } from './render.js';
 
 function createTodoTaskBtnListener(todoEditBtnEl,todoDeleteBtnEl) {
@@ -23,4 +23,23 @@ function createTodoTaskEditFormBtnListener() {
     taskeditorFormCancelBtnEl.addEventListener('click', todoTaskDom.closeTaskEditorForm);
 }
 
-export { createTodoTaskEditFormBtnListener, createProjectItemListener, createTodoTaskBtnListener }
+function createProjectHeaderListener(){
+    const projectName = document.querySelector(".main__task-header-heading");
+    projectName.addEventListener('click',projectHeaderDom.renderEditHeaderForm);
+}
+
+function createProjectHeaderEditFormListener(){
+    const saveBtn = document.querySelector(".header-edit-form__action-btn--save");
+    const cancelBtn =  document.querySelector(".header-edit-form__action-btn--cancel");
+
+    saveBtn.addEventListener("click",projectHeaderDom.submitForm);
+    cancelBtn.addEventListener("click",projectHeaderDom.cancelForm);
+}
+
+export {
+  createProjectItemListener,
+  createProjectHeaderListener,
+  createProjectHeaderEditFormListener,
+  createTodoTaskEditFormBtnListener,
+  createTodoTaskBtnListener,
+};

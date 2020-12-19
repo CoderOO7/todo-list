@@ -1,5 +1,7 @@
 import {
   createProjectItemListener,
+  createProjectHeaderListener,
+  createProjectHeaderEditFormListener,
   createTodoTaskBtnListener,
   createTodoTaskEditFormBtnListener,
 } from "./dynamicEventsListeners.js";
@@ -50,9 +52,80 @@ const renderDom = (function () {
       });
     }
 
-    function header() {}
+    function header() {
+      const mainHeaderEl = document.querySelector(".main__task-header");
+      _clearNode(mainHeaderEl);
 
-    return { list, header };
+      const headerContent = document.createElement("div");
+      headerContent.classList.add("main__task-header-content");
+
+      const headerHeading = document.createElement("h1");
+      headerHeading.classList.add("main__task-header-heading");
+      headerHeading.textContent = projectController.getActiveProject().name;
+
+      const headerActions = document.createElement("div");
+      headerActions.classList.add("main__task-header-actions");
+
+      const headerActionBtn = document.createElement("button");
+      headerActionBtn.classList.add(
+        "main__task-header-action-btn",
+        "main__task-header-action-btn--sort"
+      );
+      headerActionBtn.innerHTML = `Due Date 
+            <svg width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M16.854 5.146l3 3a.502.502 0 01-.708.708L17 6.707V18.5a.5.5 0 01-1 0V6.707l-2.146 2.147a.502.502 0 01-.708-.708l3-3a.502.502 0 01.708 0zM7.5 5a.5.5 0 01.5.5v11.791l2.146-2.145a.502.502 0 01.708.708l-3 3a.502.502 0 01-.708 0l-3-3a.502.502 0 01.708-.708L7 17.293V5.5a.5.5 0 01.5-.5z">
+            </path>
+        </svg>`;
+
+      headerContent.append(headerHeading, headerActions);
+      headerActions.append(headerActionBtn);
+      //Append to DOM
+      mainHeaderEl.append(headerContent, headerActions);
+      //Attach listener to header fiels
+      createProjectHeaderListener();
+    }
+
+    function editHeaderForm() {
+      const mainHeaderContentEl = document.querySelector(".main__task-header-content");
+      _clearNode(mainHeaderContentEl);
+
+      const form = document.createElement("form");
+      const formBody = document.createElement("div");
+      const formInputProjectName = document.createElement("input");
+      const formFooter = document.createElement("div");
+      const formActionBtnSave = document.createElement("button");
+      const formActionBtnCancel = document.createElement("button");
+
+      form.classList.add("header-edit-form");
+      formBody.classList.add("header-edit-form__body");
+      
+      formInputProjectName.classList.add("header-edit-form__control");
+      formInputProjectName.setAttribute("type", "text");
+      formInputProjectName.setAttribute("name", "name");
+      formInputProjectName.value = projectController.getActiveProject().name;
+
+      formActionBtnSave.textContent = "Save";
+      formActionBtnSave.classList.add(
+        "header-edit-form__action-btn","header-edit-form__action-btn--save"
+      );
+      formActionBtnCancel.textContent = "Cancel";
+      formActionBtnCancel.setAttribute("type","button");
+      formActionBtnCancel.classList.add(
+        "header-edit-form__action-btn","header-edit-form__action-btn--cancel"
+      );
+
+      formFooter.classList.add("header-edit-form__footer");
+
+      form.append(formBody,formFooter);
+      formBody.append(formInputProjectName);
+      formFooter.append(formActionBtnSave, formActionBtnCancel);
+      //Append to DOM
+      mainHeaderContentEl.appendChild(form);
+      //Attach listener to form fields
+      createProjectHeaderEditFormListener();
+    }
+
+    return { list, header, editHeaderForm };
   })();
 
   const todo = (() => {

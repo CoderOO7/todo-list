@@ -24,8 +24,12 @@ const projectController = (function(){
         console.log(projectId);
     }
 
-    function edit(projectId){
-        console.log(projectId);
+    function updateActiveProject(projectName){
+        if(_projectStore[_activeProjectIdx]){
+            _projectStore[_activeProjectIdx].name = projectName;
+            return true;
+        }
+        return false;
     }
 
     function setActiveProject(projectIdx){
@@ -42,7 +46,7 @@ const projectController = (function(){
         getActiveProject,
         create,
         remove,
-        edit,
+        updateActiveProject,
     }
 })();
 
