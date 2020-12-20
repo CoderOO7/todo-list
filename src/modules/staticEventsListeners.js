@@ -1,4 +1,4 @@
-import { projectDom, sidenavDom, todoTaskDom } from './domStuff.js';
+import { projectDom, sidenavDom, todoTaskDom} from './domStuff.js';
 
 projectDom.showModalBtnEl.addEventListener('click', projectDom.showModal, false);
 projectDom.addProjectModalFormBtnEl.addEventListener('click', projectDom.addProject, false);

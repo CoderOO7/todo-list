@@ -1,4 +1,4 @@
-import { todoTaskDom, projectDom, projectHeaderDom } from './domStuff.js';
+import { todoTaskDom, projectDom, projectHeaderDom,todoFilterDom } from './domStuff.js';
 import { renderDom } from './render.js';
 
 function createTodoTaskBtnListener(todoEditBtnEl,todoDeleteBtnEl) {
@@ -36,10 +36,15 @@ function createProjectHeaderEditFormListener(){
     cancelBtn.addEventListener("click",projectHeaderDom.cancelForm);
 }
 
+function createTodoFilterTabListener(filterTabEl){
+    filterTabEl.addEventListener("click",todoFilterDom.activateFilterTab); 
+}
+
 export {
   createProjectItemListener,
   createProjectHeaderListener,
   createProjectHeaderEditFormListener,
   createTodoTaskEditFormBtnListener,
   createTodoTaskBtnListener,
+  createTodoFilterTabListener
 };

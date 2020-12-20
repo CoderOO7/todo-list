@@ -92,11 +92,11 @@ ul {
   padding: 2vh;
 }
 
-.sidenav__item-project--active{
+.sidenav__item--active{
   background: var(--white);
 }
 
-.sidenav__item:not(.sidenav__item-project--active):hover{
+.sidenav__item:not(.sidenav__item--active):hover{
   background-color: var(--white);
 }
 

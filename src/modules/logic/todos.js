@@ -26,12 +26,8 @@ const todoController = (function(){
         return _activeTodoTaksId;
     }
 
-    function getTodosList(activeProjectId = null){
-        if(activeProjectId == null){
-            return _todoTaskStore.slice();
-        }else{
-            return _todoTaskStore.filter(todoTask=>todoTask.projectId === activeProjectId);
-        }
+    function getTodosList(){
+        return _todoTaskStore.slice();
     }
 
     function getTodoTask(todoTaskId){

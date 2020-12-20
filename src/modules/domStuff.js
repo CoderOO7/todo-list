@@ -1,5 +1,6 @@
 import { createTodoTaskEditFormBtnListener } from './dynamicEventsListeners.js';
 import { projectController } from './logic/projects.js';
+import { todoFilterController } from './logic/todoFilters.js';
 import { todoController } from './logic/todos.js';
 import { renderDom } from './render.js';
 
@@ -18,6 +19,14 @@ const DOMStuff = (function () {
     el.classList.toggle(className);
   }
 
+  function _highlightActiveTab(_currentActiveTabEl) {
+    const _prevActiveTabEl = document.querySelector(".sidenav__item--active");
+    if (_prevActiveTabEl) {
+      _prevActiveTabEl.classList.remove("sidenav__item--active");
+    }
+    _currentActiveTabEl.classList.add("sidenav__item--active");
+  }
+
   const projectDom = (() => {
     const showModalBtnEl = document.querySelector(
       ".sidenav__expandable-action--show-project-modal"
@@ -34,14 +43,6 @@ const DOMStuff = (function () {
     const cancelProjectModalFormBtnEl = document.querySelector(
       ".modal__form-action-btn--cancel-project"
     );
-
-    function _highlightActiveProjectTab(_currentActiveProjectEl) {
-      const _prevActiveProjectEl = document.querySelector(".sidenav__item-project--active");
-      if (_prevActiveProjectEl) {
-        _prevActiveProjectEl.classList.remove("sidenav__item-project--active");
-      }
-      _currentActiveProjectEl.classList.add("sidenav__item-project--active");
-    }
 
     function showModal(event) {
       _showBaseModal();
@@ -72,10 +73,10 @@ const DOMStuff = (function () {
       const _activeProjectEl = event.currentTarget;
       const _activeProjectIdx = _activeProjectEl.dataset.index;
 
-      _highlightActiveProjectTab(_activeProjectEl);
+      _highlightActiveTab(_activeProjectEl);
       projectController.setActiveProject(_activeProjectIdx);
       renderDom.project.header();
-      renderDom.todo.list(projectController.getActiveProject().id);
+      renderDom.todo.list(projectController.getActiveProjectTodos());
     }
 
     return {
@@ -178,11 +179,11 @@ const DOMStuff = (function () {
 
     function closeTaskEditorForm(event) {
       const _taskEditorForm = document.querySelector(".task-editor-form");
-      const _activeProjectId = projectController.getActiveProject().id;
+
       _taskEditorForm.reset();
       _taskEditorForm.remove();
       _showTaskEditorAddBtn();
-      renderDom.todo.list(_activeProjectId);
+      renderDom.todo.list(projectController.getActiveProjectTodos());
     }
 
     function renderTaskEditorForm(event) {
@@ -220,7 +221,7 @@ const DOMStuff = (function () {
         const _isDeleted = todoController.remove(todoTaskEl.dataset.todoTaskId);
         if (_isDeleted) {
           console.log("%cTodo is deleted succussfully", "color:green");
-          renderDom.todo.list(projectController.getActiveProject().id);
+          renderDom.todo.list(projectController.getActiveProjectTodos());
         }
         else
           console.error("Due to technincal error unable to delete the todo");
@@ -257,17 +258,24 @@ const DOMStuff = (function () {
     };
   })();
 
-  const mainHeaderDom = (()=>{
-    function ProjectHeader(event){
+  const todoFilterDom = (()=>{
+    
+    function activateFilterTab(event){
+      const _activeFilterTabEl = event.currentTarget;
+      const _activeFilterTabIdx = _activeFilterTabEl.dataset.index;
 
+      _highlightActiveTab(_activeFilterTabEl);
+      todoFilterController.setActiveFilterTab(_activeFilterTabIdx);
+      renderDom.todoFilter.header();
+      renderDom.todo.list(todoFilterController.getActiveFilterTabTodos());
     }
 
-    function TodayHeader(event){
-
-    }
+    return {
+      activateFilterTab,
+    };
   })();
-  
-  return { projectDom, projectHeaderDom, sidenavDom, todoTaskDom };
+
+  return { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom };
 })();
 
-export const { projectDom, projectHeaderDom, sidenavDom, todoTaskDom } = DOMStuff;
+export const { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom } = DOMStuff;

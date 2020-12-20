@@ -1,3 +1,5 @@
+import {todoController} from './todos.js';
+
 const projectFactory = ((name)=>{
     const id = '' + Date.now();
     return {id,name};
@@ -39,14 +41,24 @@ const projectController = (function(){
     function getActiveProject(){
         return _projectStore[_activeProjectIdx];
     }
+
+    function getActiveProjectTodos(){
+        if(getActiveProject().id !== null){
+            return todoController.getTodosList().filter(todoTask=>todoTask.projectId === getActiveProject().id);
+        }
+        else{
+            console.error("The active project entry not found in db.")
+        }
+    }
     
     return {
         getProjectsList,
         setActiveProject,
         getActiveProject,
+        getActiveProjectTodos,
+        updateActiveProject,
         create,
         remove,
-        updateActiveProject,
     }
 })();
 
