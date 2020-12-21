@@ -11,6 +11,7 @@
   --albaster: #fafafa;
   --albaster-dark: #f7f7f7;
   --alto: #ddd;
+  --light-grey: #aaa;
   --seashell: #f1f1f1;
   --mine-shaft: #2f2f2f;
   --mine-shaft-light: #3d3d3d;
@@ -98,6 +99,13 @@ ul {
 
 .sidenav__item:not(.sidenav__item--active):hover{
   background-color: var(--white);
+}
+
+.sidenav__item-counter{
+    color: var(--light-grey);
+    padding-left: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 
 .sidenav__expandable-header{
@@ -203,11 +211,40 @@ ul {
   align-items: center;
 }
 
+.main__task-item-checkbox-btn:hover .main__task-item-checkbox-circle{
+  background-color: hsla(0,0%,50.2%,.2);
+}
+    
+.main__task-item-checkbox-circle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
 .main__task-item-dueDate{
   flex: 1 0 auto;
   display: flex;
   justify-content: flex-end;
   padding: 0 2rem;
+}
+
+.main__task-item-checkbox-btn[aria-checked="false"] .main__task-item-checkbox-circle > svg{
+  display: none;
+}
+
+.main__task-item-checkbox-btn[aria-checked="true"] .main__task-item-checkbox-circle{
+  background-color: grey;
+  color: white;
+}
+
+.main__task-item-checkbox-btn[aria-checked="true"] ~ .main__task-item-dueDate,
+.main__task-item-checkbox-btn[aria-checked="true"] ~ .main__task-item-content{
+  text-decoration: line-through;
+  color: gray;
 }
 
 .main__task-item-actions{
@@ -377,6 +414,7 @@ ul {
 *******************/
 .header__btn, 
 .sidenav__btn,
+.main__task-item-checkbox-btn,
 .main__task-item-action-btn,
 .main__task-header-action-btn,
 .main__task-editor-btn,
@@ -389,7 +427,7 @@ ul {
 }
 
 .sidenav__item,
-.main__task-item-check,
+.main__task-item-checkbox-btn,
 .main__task-item-content,
 .modal__form-action-btn,
 .task-editor-form__action-btn{
@@ -409,8 +447,7 @@ ul {
   margin-left: 0.6rem; 
 }
 
-.sidenav__expandable-list .sidenav__item-icon,
-.main__task-item-check{
+.sidenav__expandable-list .sidenav__item-icon{
   padding: 0.6rem;
   border-radius: 50%;
   border: 1px solid black;  
@@ -428,7 +465,7 @@ ul {
   padding: 1rem 0;
 }
 
-.main__task-item-check,
+.main__task-item-checkbox-btn,
 .main__task-editor-action-btn-symbol{
   margin-right: 1rem;
 }
