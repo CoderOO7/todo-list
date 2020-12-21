@@ -133,7 +133,7 @@ ul {
   transform: rotate(-90deg);
 }
 
-.sidenav__expandable-toggle[aria-expanded=true]
+.sidenav__expandable-toggle[aria-expanded="true"]
 .sidenav__expandable-toggle-icon{
   transform: rotate(0deg);
 }
@@ -211,9 +211,7 @@ ul {
   align-items: center;
 }
 
-.main__task-item-checkbox-btn:hover .main__task-item-checkbox-circle{
-  background-color: hsla(0,0%,50.2%,.2);
-}
+
     
 .main__task-item-checkbox-circle{
   display: flex;
@@ -232,13 +230,22 @@ ul {
   padding: 0 2rem;
 }
 
-.main__task-item-checkbox-btn[aria-checked="false"] .main__task-item-checkbox-circle > svg{
+.main__task-item-checkbox-btn:hover .main__task-item-checkbox-circle{
+  background-color: hsla(0,0%,50.2%,.2);
+}
+
+.main__task-item-checkbox-btn[aria-checked="false"] > .main__task-item-checkbox-circle > svg{
   display: none;
 }
 
+.main__task-item-checkbox-btn[aria-checked="false"]:hover > .main__task-item-checkbox-circle > svg{
+  display: flex;
+}
+
 .main__task-item-checkbox-btn[aria-checked="true"] .main__task-item-checkbox-circle{
-  background-color: grey;
+  background-color: var(--light-grey);
   color: white;
+  border: none;
 }
 
 .main__task-item-checkbox-btn[aria-checked="true"] ~ .main__task-item-dueDate,
@@ -251,11 +258,20 @@ ul {
   display: flex;
   justify-content: flex-end;
   width: 8rem;
+  opacity: 0;
 }
 
 .main__task-item-actions > * {
   cursor: pointer;
   margin-left: 0.6rem;
+}
+
+.main__task-item:hover{
+  cursor: pointer;
+}
+
+.main__task-item:hover .main__task-item-actions{
+  opacity: 0.8;
 }
 
 .main__task-editor-action-btn--add{
@@ -409,6 +425,43 @@ ul {
   margin-left: 1rem;
 }
 
+/*Todo-Task-Info modal */
+.modal__todo-task-info{
+  width: 80vmin;
+  height: 60vh;
+  word-break: break-all;  
+  font-size: 2rem;
+  line-height: 1.6;
+  padding: 1rem;
+  background: var(--albaster);
+  border: 2px solid var(--mine-shaft-light);
+  border-radius: 8px;
+}
+
+.modal__todo-task-info_header{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 2.4rem;
+  border-bottom: 1px solid var(--mine-shaft-light);
+}
+
+.modal__todo-task-info_btn--close{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 32px;
+}
+.modal__todo-task-info_btn--close:hover{
+  color: white;
+  background: var(--light-grey);
+}
+
+.modal__todo-task-info_body{
+  padding-top: 1.4rem;
+}
+
 /******************
    Common Styling 
 *******************/
@@ -430,7 +483,8 @@ ul {
 .main__task-item-checkbox-btn,
 .main__task-item-content,
 .modal__form-action-btn,
-.task-editor-form__action-btn{
+.task-editor-form__action-btn,
+.modal__todo-task-info_btn--close{
   cursor: pointer;
 }
 
