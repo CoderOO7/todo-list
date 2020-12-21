@@ -6,7 +6,8 @@ const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
         projectId,
         title,
         description,
-        dueDate
+        dueDate,
+        isCompleted: false
     };
 })
 
@@ -34,7 +35,7 @@ const todoController = (function(){
         let _todoTaskItem = null;
         _todoTaskStore.forEach((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
-                return  _todoTaskItem  = _todoTaskStore[idx];
+                return  _todoTaskItem  = JSON.parse(JSON.stringify(_todoTaskStore[idx]));
             }
         })
         return _todoTaskItem;
@@ -57,13 +58,14 @@ const todoController = (function(){
         return _isDeleted;
     }
 
-    function update(todoTaskId,title,description,dueDate){
+    function update(todoTaskId,title,description,dueDate, isCompleted = false){
         let _isUpdated = false;
         _todoTaskStore.forEach((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
                 _todoTaskStore[idx].title = title,
                 _todoTaskStore[idx].description = description,
-                _todoTaskStore[idx].dueDate = dueDate
+                _todoTaskStore[idx].dueDate = dueDate,
+                _todoTaskStore[idx].isCompleted = isCompleted
                 _isUpdated =true;
                 return;
             }

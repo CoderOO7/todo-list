@@ -47,7 +47,13 @@ const projectController = (function(){
             return todoController.getTodosList().filter(todoTask=>todoTask.projectId === getActiveProject().id);
         }
         else{
-            console.error("The active project entry not found in db.")
+            console.error("The active project entry not found in db.");
+        }
+    }
+
+    function getProjectTodosById(projectId){
+        if(projectId !== null && projectId !== undefined){
+            return todoController.getTodosList().filter(todoTask=>todoTask.projectId === projectId);
         }
     }
     
@@ -56,6 +62,7 @@ const projectController = (function(){
         setActiveProject,
         getActiveProject,
         getActiveProjectTodos,
+        getProjectTodosById,
         updateActiveProject,
         create,
         remove,

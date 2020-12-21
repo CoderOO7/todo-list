@@ -1,7 +1,9 @@
 import { todoTaskDom, projectDom, projectHeaderDom,todoFilterDom } from './domStuff.js';
 import { renderDom } from './render.js';
 
-function createTodoTaskBtnListener(todoEditBtnEl,todoDeleteBtnEl) {
+function createTodoTaskBtnListener(todocheckboxBtnEl, todoContentEl, todoEditBtnEl,todoDeleteBtnEl) {
+    todocheckboxBtnEl.addEventListener("click",todoTaskDom.toggleTodoTaskCompletedState,false);
+    // todoContentEl.addEventListener("click",todoTaskDom.showTodoInfo,false);
     todoEditBtnEl.addEventListener("click", todoTaskDom.renderPopulatedTaskEditorForm, false);
     todoDeleteBtnEl.addEventListener("click", todoTaskDom.deleteTodoTask, false);
 }

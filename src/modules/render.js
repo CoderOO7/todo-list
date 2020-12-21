@@ -10,6 +10,7 @@ import { projectController } from "./logic/projects.js";
 import { todoController } from "./logic/todos.js";
 import {todoFilterController} from "./logic/todoFilters.js";
 import {clearNode,getTodayDate} from "./helper.js";
+import { todoTaskDom } from "./domStuff.js";
 
 const renderDom = (function () {
   
@@ -134,7 +135,8 @@ const renderDom = (function () {
         _todosArr.forEach((todoTask) => {
           const taskItem = document.createElement("li");
           const taskItemInfo = document.createElement("div");
-          const taskItemCheck = document.createElement("div");
+          const taskItemCheckboxBtn = document.createElement("button");
+          const taskItemCheckboxCircle = document.createElement("div");
           const taskItemContent = document.createElement("div");
           const taskItemDueDate = document.createElement("div");
           const taskItemActions = document.createElement("div");
@@ -144,7 +146,15 @@ const renderDom = (function () {
           taskItem.setAttribute("class", "main__task-item");
           taskItem.setAttribute("data-todo-task-id", todoTask.id);
           taskItemInfo.setAttribute("class", "main__task-item-info");
-          taskItemCheck.setAttribute("class", "main__task-item-check");
+          taskItemCheckboxBtn.setAttribute("type", "button");
+          taskItemCheckboxBtn.setAttribute("role", "checkbox");
+          if(todoTask.isCompleted){
+            taskItemCheckboxBtn.setAttribute("aria-checked", "true");
+          }else{
+            taskItemCheckboxBtn.setAttribute("aria-checked", "false");
+          }
+          taskItemCheckboxBtn.setAttribute("class", "main__task-item-checkbox-btn");
+          taskItemCheckboxCircle.setAttribute("class", "main__task-item-checkbox-circle");
           taskItemContent.setAttribute("class", "main__task-item-content");
           taskItemDueDate.setAttribute("class", "main__task-item-dueDate");
           taskItemActions.setAttribute("class", "main__task-item-actions");
@@ -157,6 +167,7 @@ const renderDom = (function () {
             "main__task-item-action-btn main__task-item-action-btn--delete"
           );
   
+          taskItemCheckboxCircle.innerHTML = `<svg width="24" height="24"><path fill="currentColor" d="M11.23 13.7l-2.15-2a.55.55 0 0 0-.74-.01l.03-.03a.46.46 0 0 0 0 .68L11.24 15l5.4-5.01a.45.45 0 0 0 0-.68l.02.03a.55.55 0 0 0-.73 0l-4.7 4.35z"></path></svg>`;
           taskItemContent.textContent = todoTask.title;
           taskItemDueDate.textContent = todoTask.dueDate;
   
@@ -166,12 +177,13 @@ const renderDom = (function () {
             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><rect width="14" height="1" x="5" y="6" fill="currentColor" rx=".5"></rect><path fill="currentColor" d="M10 9h1v8h-1V9zm3 0h1v8h-1V9z"></path><path stroke="currentColor" d="M17.5 6.5h-11V18A1.5 1.5 0 0 0 8 19.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5zm-9 0h7V5A1.5 1.5 0 0 0 14 3.5h-4A1.5 1.5 0 0 0 8.5 5v1.5z"></path></g></svg>';
   
           taskItem.append(taskItemInfo, taskItemActions);
-          taskItemInfo.append(taskItemCheck, taskItemContent, taskItemDueDate);
+          taskItemInfo.append(taskItemCheckboxBtn, taskItemContent, taskItemDueDate);
+          taskItemCheckboxBtn.append(taskItemCheckboxCircle);
           taskItemActions.append(taskItemEditBtn, taskItemDeleteBtn);
   
           taskList.append(taskItem);
   
-          createTodoTaskBtnListener(taskItemEditBtn, taskItemDeleteBtn);
+          createTodoTaskBtnListener(taskItemCheckboxBtn, taskItemContent, taskItemEditBtn, taskItemDeleteBtn);
         });
       }
     }

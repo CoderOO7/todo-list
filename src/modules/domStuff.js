@@ -167,6 +167,12 @@ const DOMStuff = (function () {
       taskeditorAddBtnEl.classList.remove("main__task-editor-action-btn--hide");
     }
 
+    function _toggleTodoCheckboxBtn(taskCheckboxBtnEl){
+        taskCheckboxBtnEl.getAttribute("aria-checked") === "false"
+          ? taskCheckboxBtnEl.setAttribute("aria-checked","true")
+          : taskCheckboxBtnEl.setAttribute("aria-checked","false");
+    }
+
     function _getTaskEditorFormData(_taskEditorForm) {
       const data = {};
 
@@ -246,6 +252,25 @@ const DOMStuff = (function () {
       }
     }
 
+    function toggleTodoTaskCompletedState(event){
+      console.log(event);
+      const _todoTaskCheckboxBtnEl = event.currentTarget;
+      const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
+
+      const _todoTaskObj = todoController.getTodoTask(_todoTaskId);
+      _todoTaskObj.isCompleted = true;
+      const _isUpdated =  todoController.update(
+        _todoTaskId,
+        _todoTaskObj.title,
+        _todoTaskObj.description,
+        _todoTaskObj.dueDate,
+        _todoTaskObj.isCompleted
+      );
+      if(_isUpdated){
+        _toggleTodoCheckboxBtn(_todoTaskCheckboxBtnEl);
+      }
+    }
+
 
     return {
       taskeditorAddBtnEl,
@@ -255,6 +280,7 @@ const DOMStuff = (function () {
       closeTaskEditorForm,
       editTodoTask,
       deleteTodoTask,
+      toggleTodoTaskCompletedState
     };
   })();
 
