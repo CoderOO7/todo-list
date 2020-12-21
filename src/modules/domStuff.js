@@ -173,6 +173,20 @@ const DOMStuff = (function () {
           : taskCheckboxBtnEl.setAttribute("aria-checked","false");
     }
 
+    function hideTodoInfoModal(event){ 
+      const _todoInfoModalEl = event.currentTarget.parentNode.parentNode;
+      if(_todoInfoModalEl.className === "modal__todo-task-info");{
+        _todoInfoModalEl.remove();
+        _hideBaseModal();
+      }
+    }
+
+    function showTodoInfoModal(event){
+      const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
+      _showBaseModal();
+      renderDom.todo.taskInfoModal(_todoTaskId);
+    }
+
     function _getTaskEditorFormData(_taskEditorForm) {
       const data = {};
 
@@ -253,7 +267,6 @@ const DOMStuff = (function () {
     }
 
     function toggleTodoTaskCompletedState(event){
-      console.log(event);
       const _todoTaskCheckboxBtnEl = event.currentTarget;
       const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
 
@@ -280,7 +293,9 @@ const DOMStuff = (function () {
       closeTaskEditorForm,
       editTodoTask,
       deleteTodoTask,
-      toggleTodoTaskCompletedState
+      toggleTodoTaskCompletedState,
+      showTodoInfoModal,
+      hideTodoInfoModal
     };
   })();
 

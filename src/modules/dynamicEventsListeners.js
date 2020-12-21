@@ -1,18 +1,16 @@
 import { todoTaskDom, projectDom, projectHeaderDom,todoFilterDom } from './domStuff.js';
 import { renderDom } from './render.js';
 
-function createTodoTaskBtnListener(todocheckboxBtnEl, todoContentEl, todoEditBtnEl,todoDeleteBtnEl) {
+const createTodoTaskBtnListener = (todocheckboxBtnEl, todoContentEl, todoEditBtnEl,todoDeleteBtnEl)=> {
     todocheckboxBtnEl.addEventListener("click",todoTaskDom.toggleTodoTaskCompletedState,false);
-    // todoContentEl.addEventListener("click",todoTaskDom.showTodoInfo,false);
+    todoContentEl.addEventListener("click",todoTaskDom.showTodoInfoModal,false);
     todoEditBtnEl.addEventListener("click", todoTaskDom.renderPopulatedTaskEditorForm, false);
     todoDeleteBtnEl.addEventListener("click", todoTaskDom.deleteTodoTask, false);
 }
 
-function createProjectItemListener(projectItemEl) {
-    projectItemEl.addEventListener("click", projectDom.activateProject, false);
-}
+const createProjectItemListener = (projectItemEl) => projectItemEl.addEventListener("click", projectDom.activateProject, false);
 
-function createTodoTaskEditFormBtnListener() {
+const createTodoTaskEditFormBtnListener = () => {
     const taskeditorFormAddBtnEl = document.querySelector(".task-editor-form__action-btn--add");
     const taskeditorFormSaveBtnEl = document.querySelector(".task-editor-form__action-btn--save");
     const taskeditorFormCancelBtnEl = document.querySelector(".task-editor-form__action-btn--cancel");
@@ -25,12 +23,16 @@ function createTodoTaskEditFormBtnListener() {
     taskeditorFormCancelBtnEl.addEventListener('click', todoTaskDom.closeTaskEditorForm);
 }
 
-function createProjectHeaderListener(){
+const createTodoTaskInfoModalListener = (closeBtnEl) => {
+    closeBtnEl.addEventListener("click",todoTaskDom.hideTodoInfoModal);
+}
+
+const createProjectHeaderListener = () => {
     const projectName = document.querySelector(".main__task-header-heading");
     projectName.addEventListener('click',projectHeaderDom.renderEditHeaderForm);
 }
 
-function createProjectHeaderEditFormListener(){
+const createProjectHeaderEditFormListener = () => {
     const saveBtn = document.querySelector(".header-edit-form__action-btn--save");
     const cancelBtn =  document.querySelector(".header-edit-form__action-btn--cancel");
 
@@ -38,7 +40,7 @@ function createProjectHeaderEditFormListener(){
     cancelBtn.addEventListener("click",projectHeaderDom.cancelForm);
 }
 
-function createTodoFilterTabListener(filterTabEl){
+const createTodoFilterTabListener = (filterTabEl) => {
     filterTabEl.addEventListener("click",todoFilterDom.activateFilterTab); 
 }
 
@@ -47,6 +49,7 @@ export {
   createProjectHeaderListener,
   createProjectHeaderEditFormListener,
   createTodoTaskEditFormBtnListener,
+  createTodoTaskInfoModalListener,
   createTodoTaskBtnListener,
-  createTodoFilterTabListener
+  createTodoFilterTabListener,
 };

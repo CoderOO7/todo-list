@@ -39,7 +39,7 @@ const projectController = (function(){
     }
 
     function getActiveProject(){
-        return _projectStore[_activeProjectIdx];
+        return {..._projectStore[_activeProjectIdx]};
     }
 
     function getActiveProjectTodos(){
@@ -52,8 +52,19 @@ const projectController = (function(){
     }
 
     function getProjectTodosById(projectId){
-        if(projectId !== null && projectId !== undefined){
+        if(projectId){
             return todoController.getTodosList().filter(todoTask=>todoTask.projectId === projectId);
+        }else{
+            console.error("Provided project id is invalid");
+        }
+    }
+
+    function getProjectById(projectId){
+        const _project = _projectStore.find((project)=> project.id == projectId);
+        if(_project){
+            return {..._project};
+        }else{
+            console.error("The provided index value is not valid :(");
         }
     }
     
@@ -63,6 +74,7 @@ const projectController = (function(){
         getActiveProject,
         getActiveProjectTodos,
         getProjectTodosById,
+        getProjectById,
         updateActiveProject,
         create,
         remove,

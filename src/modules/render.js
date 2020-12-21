@@ -4,7 +4,8 @@ import {
   createProjectHeaderEditFormListener,
   createTodoTaskBtnListener,
   createTodoTaskEditFormBtnListener,
-  createTodoFilterTabListener
+  createTodoFilterTabListener,
+  createTodoTaskInfoModalListener
 } from "./dynamicEventsListeners.js";
 import { projectController } from "./logic/projects.js";
 import { todoController } from "./logic/todos.js";
@@ -274,7 +275,44 @@ const renderDom = (function () {
       createTodoTaskEditFormBtnListener();
     }
 
-    return { list, taskEditForm };
+    function taskInfoModal(todoTaskId){
+      const _baseModalEl = document.querySelector(".modal");
+
+      const _todoTask = todoController.getTodoTask(todoTaskId);
+      
+      const modalItem = document.createElement("section");
+      const modalHeader = document.createElement("header");
+      const closeBtn = document.createElement("span");
+      const modalBody = document.createElement("div");
+      const taskTitle = document.createElement("h1");
+      const taskDescription = document.createElement("p");
+      const taskDueDate = document.createElement("p");
+      const taskProject = document.createElement("p");
+
+      modalItem.classList.add("modal__item","modal__todo-task-info");
+      modalHeader.classList.add("modal__todo-task-info_header");
+      modalBody.classList.add("modal__todo-task-info_body");
+      taskTitle.classList.add("modal__todo-task-info_title");
+      
+      closeBtn.classList.add("modal__todo-task-info_btn--close");
+      closeBtn.setAttribute("role","button");
+      closeBtn.textContent = "X";
+      
+      taskTitle.textContent = _todoTask.title;
+      taskDescription.textContent = `Description: ${_todoTask.description}`;
+      taskDueDate.textContent = `DueDate: ${_todoTask.dueDate}`;
+      taskProject.textContent = `Project: ${projectController.getProjectById(_todoTask.projectId).name}`;
+
+      modalItem.append(modalHeader,modalBody);
+      modalHeader.append(taskTitle,closeBtn);
+      modalBody.append(taskDescription,taskDueDate,taskProject);
+      _baseModalEl.append(modalItem);
+
+      createTodoTaskInfoModalListener(closeBtn);
+    }
+
+
+    return { list, taskEditForm, taskInfoModal };
   })();
 
   const todoFilter = (()=>{
