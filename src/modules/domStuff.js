@@ -105,7 +105,7 @@ const DOMStuff = (function () {
       if(projectController.updateActiveProject(_name)){
         renderDom.project.header();
         renderDom.project.list();
-        console.log("%cProject is updated succussfully", "color:green");
+        console.log("%cProject is updated successfully", "color:green");
       }else{
         console.error("Due to technical error unable to update the project");
       };
@@ -240,7 +240,7 @@ const DOMStuff = (function () {
       if (todoTaskEl.className === "main__task-item") {
         const _isDeleted = todoController.remove(todoTaskEl.dataset.todoTaskId);
         if (_isDeleted) {
-          console.log("%cTodo is deleted succussfully", "color:green");
+          console.log("%cTodo is deleted successfully", "color:green");
           renderDom.todo.list(projectController.getActiveProjectTodos());
         }
         else
@@ -261,7 +261,7 @@ const DOMStuff = (function () {
         _taskEditorFormData.dueDate
       );
       if(_isUpdated){
-        console.log("%cTodo is updated succussfully", "color:green");
+        console.log("%cTodo is updated successfully", "color:green");
         closeTaskEditorForm();
       }
     }
@@ -271,13 +271,13 @@ const DOMStuff = (function () {
       const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
 
       const _todoTaskObj = todoController.getTodoTask(_todoTaskId);
-      _todoTaskObj.isCompleted = true;
+      _todoTaskObj.completed = true;
       const _isUpdated =  todoController.update(
         _todoTaskId,
         _todoTaskObj.title,
         _todoTaskObj.description,
         _todoTaskObj.dueDate,
-        _todoTaskObj.isCompleted
+        _todoTaskObj.completed
       );
       if(_isUpdated){
         _toggleTodoCheckboxBtn(_todoTaskCheckboxBtnEl);

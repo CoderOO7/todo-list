@@ -1,4 +1,5 @@
 import {todoController} from './todos.js';
+import {todoAppLocalStorage} from '../storage/localStorage.js'
 
 const projectFactory = ((name)=>{
     const id = '' + Date.now();
@@ -9,7 +10,7 @@ const projectController = (function(){
     const _projectStore = [];
     let _activeProjectIdx= null;
 
-    function _addProjectToStore(project){
+    function addProjectToStore(project){
         _projectStore.push(project);
     }
 
@@ -19,7 +20,8 @@ const projectController = (function(){
 
     function create(projectName){
         let newProject = projectFactory(projectName);
-        _addProjectToStore(newProject);
+        addProjectToStore(newProject);
+        todoAppLocalStorage.populate.projects(_projectStore);
     }
 
     function remove(projectId){
@@ -29,6 +31,7 @@ const projectController = (function(){
     function updateActiveProject(projectName){
         if(_projectStore[_activeProjectIdx]){
             _projectStore[_activeProjectIdx].name = projectName;
+            todoAppLocalStorage.populate.projects(_projectStore);
             return true;
         }
         return false;
@@ -69,6 +72,7 @@ const projectController = (function(){
     }
     
     return {
+        addProjectToStore,
         getProjectsList,
         setActiveProject,
         getActiveProject,

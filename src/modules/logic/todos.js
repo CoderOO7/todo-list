@@ -1,3 +1,5 @@
+import {todoAppLocalStorage} from '../storage/localStorage.js'
+
 const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
     const id = '' + Date.now();
     const projectId = activeProjectId;
@@ -7,7 +9,7 @@ const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
         title,
         description,
         dueDate,
-        isCompleted: false
+        completed: false
     };
 })
 
@@ -15,7 +17,7 @@ const todoController = (function(){
     const _todoTaskStore = [];
     let _activeTodoTaksId = null;
 
-    function _addTodoTaskToStore(todoTask){
+    function addTodoTaskToStore(todoTask){
         _todoTaskStore.push(todoTask);
     }
 
@@ -43,7 +45,8 @@ const todoController = (function(){
 
     function create(activeProjectId,title,description,date){
         let newTodoTask = todoTaskFactory(activeProjectId,title,description,date);
-        _addTodoTaskToStore(newTodoTask);
+        addTodoTaskToStore(newTodoTask);
+        todoAppLocalStorage.populate.todos([..._todoTaskStore]);
     }
 
     function remove(todoTaskId){
@@ -51,6 +54,7 @@ const todoController = (function(){
         _todoTaskStore.forEach((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
                 _todoTaskStore.splice(idx,1);
+                todoAppLocalStorage.populate.todos([..._todoTaskStore]);
                 _isDeleted = true;
                 return;
             }
@@ -58,14 +62,15 @@ const todoController = (function(){
         return _isDeleted;
     }
 
-    function update(todoTaskId,title,description,dueDate, isCompleted = false){
+    function update(todoTaskId,title,description,dueDate, completed = false){
         let _isUpdated = false;
         _todoTaskStore.forEach((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
-                _todoTaskStore[idx].title = title,
-                _todoTaskStore[idx].description = description,
-                _todoTaskStore[idx].dueDate = dueDate,
-                _todoTaskStore[idx].isCompleted = isCompleted
+                _todoTaskStore[idx].title = title;
+                _todoTaskStore[idx].description = description;
+                _todoTaskStore[idx].dueDate = dueDate;
+                _todoTaskStore[idx].completed = completed;
+                todoAppLocalStorage.populate.todos([..._todoTaskStore]);
                 _isUpdated =true;
                 return;
             }
@@ -74,6 +79,7 @@ const todoController = (function(){
     }
     
     return {
+        addTodoTaskToStore,
         setActiveTodoTaskId,
         getActiveTodoTaskId,
         getTodosList,
