@@ -1,4 +1,5 @@
-import {todoAppLocalStorage} from '../storage/localStorage.js'
+import {todoAppLocalStorage} from '../storage/localStorage.js';
+import {TODO_STORE_KEY} from '../../constants.js';
 
 const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
     const id = '' + Date.now();
@@ -46,7 +47,7 @@ const todoController = (function(){
     function create(activeProjectId,title,description,date){
         let newTodoTask = todoTaskFactory(activeProjectId,title,description,date);
         addTodoTaskToStore(newTodoTask);
-        todoAppLocalStorage.populate.todos([..._todoTaskStore]);
+        todoAppLocalStorage.storeItem(TODO_STORE_KEY,[..._todoTaskStore]);
     }
 
     function remove(todoTaskId){
@@ -54,7 +55,7 @@ const todoController = (function(){
         _todoTaskStore.forEach((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
                 _todoTaskStore.splice(idx,1);
-                todoAppLocalStorage.populate.todos([..._todoTaskStore]);
+                todoAppLocalStorage.storeItem(TODO_STORE_KEY,[..._todoTaskStore]);
                 _isDeleted = true;
                 return;
             }
@@ -70,7 +71,7 @@ const todoController = (function(){
                 _todoTaskStore[idx].description = description;
                 _todoTaskStore[idx].dueDate = dueDate;
                 _todoTaskStore[idx].completed = completed;
-                todoAppLocalStorage.populate.todos([..._todoTaskStore]);
+                todoAppLocalStorage.storeItem(TODO_STORE_KEY,[..._todoTaskStore]);
                 _isUpdated =true;
                 return;
             }
