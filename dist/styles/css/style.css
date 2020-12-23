@@ -297,6 +297,10 @@ ul {
 
 .main__task-editor-action-btn-symbol{
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
   padding: 0.2rem;
   flex: 1 0 auto;
   color: black;

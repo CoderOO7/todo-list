@@ -20,6 +20,7 @@ const todoController = (function(){
 
     function addTodoTaskToStore(todoTask){
         _todoTaskStore.push(todoTask);
+        console.log(todoTask);
     }
 
     function setActiveTodoTaskId(todoTaskId){

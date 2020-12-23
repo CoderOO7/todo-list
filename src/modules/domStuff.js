@@ -1,4 +1,4 @@
-import { createTodoTaskEditFormBtnListener } from './dynamicEventsListeners.js';
+import { DEFAULT_PROJECT_ID } from '../constants.js';
 import { projectController } from './logic/projects.js';
 import { todoFilterController } from './logic/todoFilters.js';
 import { todoController } from './logic/todos.js';
@@ -76,6 +76,7 @@ const DOMStuff = (function () {
       _highlightActiveTab(_activeProjectEl);
       projectController.setActiveProject(_activeProjectIdx);
       renderDom.project.header();
+      renderDom.todo.taskEditButton();
       renderDom.todo.list(projectController.getActiveProjectTodos());
     }
 
@@ -94,7 +95,7 @@ const DOMStuff = (function () {
 
     function renderEditHeaderForm(event){
       renderDom.project.editHeaderForm();
-    }
+  }
 
     function submitForm(event){
       event.preventDefault();
@@ -157,14 +158,18 @@ const DOMStuff = (function () {
 
   const todoTaskDom = (() => {
 
-    const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
-
     function _hideTaskEditorAddBtn() {
-      taskeditorAddBtnEl.classList.add("main__task-editor-action-btn--hide");
+      const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
+      if(taskeditorAddBtnEl){
+        taskeditorAddBtnEl.classList.add("main__task-editor-action-btn--hide");
+      }
     }
 
     function _showTaskEditorAddBtn() {
-      taskeditorAddBtnEl.classList.remove("main__task-editor-action-btn--hide");
+      const taskeditorAddBtnEl = document.querySelector(".main__task-editor-action-btn--add");
+      if(taskeditorAddBtnEl){
+        taskeditorAddBtnEl.classList.remove("main__task-editor-action-btn--hide");
+      }
     }
 
     function _toggleTodoCheckboxBtn(taskCheckboxBtnEl){
@@ -207,6 +212,7 @@ const DOMStuff = (function () {
     }
 
     function renderTaskEditorForm(event) {
+      console.log(event);
       renderDom.todo.taskEditForm();
       _hideTaskEditorAddBtn();
     }
@@ -286,7 +292,6 @@ const DOMStuff = (function () {
 
 
     return {
-      taskeditorAddBtnEl,
       renderTaskEditorForm,
       renderPopulatedTaskEditorForm,
       addTodoTask,
@@ -307,6 +312,7 @@ const DOMStuff = (function () {
 
       _highlightActiveTab(_activeFilterTabEl);
       todoFilterController.setActiveFilterTab(_activeFilterTabIdx);
+      
       renderDom.todoFilter.header();
       renderDom.todo.list(todoFilterController.getActiveFilterTabTodos());
     }

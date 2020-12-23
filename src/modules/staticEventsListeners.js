@@ -7,7 +7,6 @@ projectDom.cancelProjectModalFormBtnEl.addEventListener('click', projectDom.clos
 sidenavDom.sidenavToggleBtnEl.addEventListener('click', sidenavDom.toggleSidenav, false);
 sidenavDom.sidenavExpandabletoggleEl.addEventListener('click', sidenavDom.toggleSidenavExpandableList, false);
 
-todoTaskDom.taskeditorAddBtnEl.addEventListener('click', todoTaskDom.renderTaskEditorForm, false);
 
 window.addEventListener("DOMContentLoaded", (e) => {
     const ww = window.innerWidth;

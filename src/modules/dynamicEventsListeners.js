@@ -10,6 +10,8 @@ const createTodoTaskBtnListener = (todocheckboxBtnEl, todoContentEl, todoEditBtn
 
 const createProjectItemListener = (projectItemEl) => projectItemEl.addEventListener("click", projectDom.activateProject, false);
 
+const createTodoTaskEditBtnListener = (taskEditBtnEl) => taskEditBtnEl.addEventListener("click",todoTaskDom.renderTaskEditorForm);
+
 const createTodoTaskEditFormBtnListener = () => {
     const taskeditorFormAddBtnEl = document.querySelector(".task-editor-form__action-btn--add");
     const taskeditorFormSaveBtnEl = document.querySelector(".task-editor-form__action-btn--save");
@@ -48,6 +50,7 @@ export {
   createProjectItemListener,
   createProjectHeaderListener,
   createProjectHeaderEditFormListener,
+  createTodoTaskEditBtnListener,
   createTodoTaskEditFormBtnListener,
   createTodoTaskInfoModalListener,
   createTodoTaskBtnListener,

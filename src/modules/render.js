@@ -3,6 +3,7 @@ import {
   createProjectHeaderListener,
   createProjectHeaderEditFormListener,
   createTodoTaskBtnListener,
+  createTodoTaskEditBtnListener,
   createTodoTaskEditFormBtnListener,
   createTodoFilterTabListener,
   createTodoTaskInfoModalListener
@@ -190,6 +191,30 @@ const renderDom = (function () {
       });
     }
 
+    function taskEditButton(){
+      const taskEditBtnParentEl = document.querySelector(".main__task-editor");
+      clearNode(taskEditBtnParentEl);
+
+      const taskEditBtn = document.createElement("button");
+      const taskEditBtnSymbol = document.createElement("span");
+
+      taskEditBtn.setAttribute("class","main__task-editor-btn main__task-editor-action-btn--add");
+      taskEditBtnSymbol.setAttribute("class","main__task-editor-action-btn-symbol");
+
+      taskEditBtnSymbol.innerHTML = `
+      <svg width="13" height="13">
+          <path
+              d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
+              fill="currentColor" fill-rule="evenodd"></path>
+      </svg>`;
+      taskEditBtn.insertAdjacentElement("afterBegin",taskEditBtnSymbol);
+      taskEditBtn.insertAdjacentText("beforeEnd","Add Task");
+      //Load to DOM
+      taskEditBtnParentEl.append(taskEditBtn);
+      //Attach Listener
+      createTodoTaskEditBtnListener(taskEditBtn);
+    }
+
     function taskEditForm(todoTaskId = null) {
       const taskEditor = document.querySelector(".main__task-editor");
       const taskList = document.querySelector(".main__task-list");
@@ -313,7 +338,7 @@ const renderDom = (function () {
     }
 
 
-    return { list, taskEditForm, taskInfoModal };
+    return { list, taskEditButton, taskEditForm, taskInfoModal };
   })();
 
   const todoFilter = (()=>{
