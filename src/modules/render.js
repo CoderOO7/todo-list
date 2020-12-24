@@ -101,6 +101,9 @@ const renderDom = (function () {
       formInputProjectName.classList.add("header-edit-form__control");
       formInputProjectName.setAttribute("type", "text");
       formInputProjectName.setAttribute("name", "name");
+      formInputProjectName.setAttribute("pattern", "[A-z0-9 ]+");
+      formInputProjectName.setAttribute("required", "true");
+
       formInputProjectName.value = projectController.getActiveProject().name;
 
       formActionBtnSave.textContent = "Save";
@@ -238,6 +241,9 @@ const renderDom = (function () {
       formInputTitle.setAttribute("type", "text");
       formInputTitle.setAttribute("name", "title");
       formInputTitle.setAttribute("placeholder", "Title: 100DaysOfCode");
+      formInputTitle.setAttribute("pattern", "[A-z0-9 ]+");
+      formInputTitle.setAttribute("required", "true");
+
 
       formTextarea.setAttribute("class", "task-editor-form__control");
       formTextarea.setAttribute("name", "description");
@@ -420,6 +426,7 @@ const renderDom = (function () {
             break;
 
           case "Today":
+            const todayDate = new Date().getDate();
             sidenavItemIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24">
             <g fill="currentColor" fill-rule="evenodd">
                 <path fill-rule="nonzero" d="M6 4.5h12A1.5 1.5 0 0 1 19.5 6v2.5h-15V6A1.5 1.5 0 0 1 6 4.5z" opacity=".1">
@@ -427,7 +434,7 @@ const renderDom = (function () {
                 <path fill-rule="nonzero" d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H6zm1 3h10a.5.5 0 1 1 0 1H7a.5.5 0 0 1 0-1z">
                 </path>
                 <text font-family="-apple-system, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" font-size="9" transform="translate(4 2)" font-weight="500">
-                    <tspan x="8" y="15" text-anchor="middle">03</tspan>
+                    <tspan x="8" y="15" text-anchor="middle">${todayDate}</tspan>
                 </text>
             </g>
         </svg>`;

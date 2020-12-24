@@ -27,6 +27,19 @@ const DOMStuff = (function () {
     _currentActiveTabEl.classList.add("sidenav__item--active");
   }
 
+  function _showEror(formField){
+    formField.classList.add("error--validation");
+
+    if(formField.validity.valueMissing){
+      formField.setAttribute("Placeholder","Field can't be blank");
+
+    }else if(formField.validity.patternMismatch){
+      console.log(formField);
+      formField.value = '';
+      formField.setAttribute("Placeholder","Allow only alphabets,digits and space");
+    }
+  }
+
   const projectDom = (() => {
     const showModalBtnEl = document.querySelector(
       ".sidenav__expandable-action--show-project-modal"
@@ -57,15 +70,16 @@ const DOMStuff = (function () {
 
     function addProject(event) {
       event.preventDefault();
+      const _projectNameEl = _addProjectModalFormEl.elements.projectName;
+      const _projectName = _projectNameEl.value.trim();
 
-      const _projectName = _addProjectModalFormEl.elements.projectName.value.trim();
-      if (_projectName !== '') {
+      if (_projectNameEl.validity.valid) {
         projectController.create(_projectName);
         renderDom.project.list();
         closeModal();
-      } else {
-        //TODO error_message modal
-        alert("Please, don't leave field blank");
+
+      }else{
+        _showEror(_projectNameEl);
       }
     }
 
@@ -102,14 +116,20 @@ const DOMStuff = (function () {
 
       const _formEl  = document.querySelector(".header-edit-form");
       //fetch form fields value
-      const _name = _formEl.elements.name.value;
-      if(projectController.updateActiveProject(_name)){
-        renderDom.project.header();
-        renderDom.project.list();
-        console.log("%cProject is updated successfully", "color:green");
+      const _nameEl = _formEl.elements.name;
+      if(_nameEl.validity.valid){
+        const _updated = projectController.updateActiveProject(_nameEl.value);
+        if(_updated){
+          renderDom.project.header();
+          renderDom.project.list();
+          console.log("%cProject is updated successfully", "color:green");
+
+        }else{
+          console.error("Due to technical error unable to update the project");
+        }
       }else{
-        console.error("Due to technical error unable to update the project");
-      };
+        _showEror(_nameEl);
+      }
     }
 
     function cancelForm(event){
@@ -231,13 +251,20 @@ const DOMStuff = (function () {
       const _taskEditorFormData = _getTaskEditorFormData(_taskEditorForm);
       const _activeProjectId = projectController.getActiveProject().id;
 
-      todoController.create(
-        _activeProjectId,
-        _taskEditorFormData.title,
-        _taskEditorFormData.description,
-        _taskEditorFormData.dueDate
-      );
-      closeTaskEditorForm();
+      const _titleEl = _taskEditorForm.elements.title;
+      if(_titleEl.validity.valid){
+
+        todoController.create(
+          _activeProjectId,
+          _taskEditorFormData.title,
+          _taskEditorFormData.description,
+          _taskEditorFormData.dueDate
+        );
+        closeTaskEditorForm();
+
+      }else{
+        _showEror(_titleEl);
+      } 
     }
 
     function deleteTodoTask(event) {
@@ -258,17 +285,24 @@ const DOMStuff = (function () {
       event.preventDefault();
 
       const _taskEditorForm = document.querySelector(".task-editor-form");
+      const _formTitleEl = _taskEditorForm.elements.title;
       const _todoTaskId = todoController.getActiveTodoTaskId();
       const _taskEditorFormData = _getTaskEditorFormData(_taskEditorForm);
-      const _isUpdated = todoController.update(
-        _todoTaskId,
-        _taskEditorFormData.title,
-        _taskEditorFormData.description,
-        _taskEditorFormData.dueDate
-      );
-      if(_isUpdated){
-        console.log("%cTodo is updated successfully", "color:green");
-        closeTaskEditorForm();
+
+      if(_formTitleEl.validity.valid){
+        const _isUpdated = todoController.update(
+          _todoTaskId,
+          _taskEditorFormData.title,
+          _taskEditorFormData.description,
+          _taskEditorFormData.dueDate
+        );
+        if(_isUpdated){
+          console.log("%cTodo is updated successfully", "color:green");
+          closeTaskEditorForm();
+        }
+
+      }else{
+        _showEror(_formTitleEl);
       }
     }
 
