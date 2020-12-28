@@ -26,8 +26,24 @@ const projectController = (function(){
         todoAppLocalStorage.storeItem(PROJECT_STORE_KEY,_projectStore);
     }
 
-    function remove(projectId){
-        console.log(projectId);
+    function remove(projectIdx){
+        const _project = _projectStore[projectIdx];
+        if(_project){
+            const todosDeleted =  todoController.getTodosList()
+                    .filter(todoTask=>todoTask.projectId === getActiveProject().id)
+                    .every((todoTask)=>todoController.remove(todoTask.id));
+
+            if(todosDeleted === true){
+                _projectStore.splice(projectIdx,1);
+                todoAppLocalStorage.storeItem(PROJECT_STORE_KEY,_projectStore);
+                return true;
+            }
+
+            return false;
+
+        }else{
+            console.error("Invalid project Idx :(");
+        }
     }
 
     function updateActiveProject(projectName){

@@ -24,8 +24,9 @@ import {PROJECT_STORE_KEY, TODO_STORE_KEY} from './constants.js';
     renderDom.project.list();
     renderDom.todo.list();
 
-    // Activating default tab on intial load 
+    // Activating default tab on initial load
+    const event = new MouseEvent('click');
     const _todayTaskFilterTab = document.querySelector(".sidenav__filter-item[data-index='0']");
-    todoFilterDom.activateFilterTab(_todayTaskFilterTab.click());
-
+    _todayTaskFilterTab.addEventListener('click',todoFilterDom.activateFilterTab);
+    _todayTaskFilterTab.dispatchEvent(event);
 })();

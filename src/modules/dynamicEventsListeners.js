@@ -8,7 +8,10 @@ const createTodoTaskBtnListener = (todocheckboxBtnEl, todoContentEl, todoEditBtn
     todoDeleteBtnEl.addEventListener("click", todoTaskDom.deleteTodoTask, false);
 }
 
-const createProjectItemListener = (projectItemEl) => projectItemEl.addEventListener("click", projectDom.activateProject, false);
+const createProjectItemListener = (projectItemEl,projectItemDelteEl) => {
+    projectItemEl.addEventListener("click", projectDom.activateProject, false);
+    projectItemDelteEl.addEventListener("click",projectDom.removeProject);
+};
 
 const createTodoTaskEditBtnListener = (taskEditBtnEl) => taskEditBtnEl.addEventListener("click",todoTaskDom.renderTaskEditorForm);
 

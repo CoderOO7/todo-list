@@ -28,7 +28,8 @@ const todoAppLocalStorage = (function(window){
             if(reference){
                 return (JSON.parse(reference));
             }else{
-                console.error('Provided store key is invalid :(');
+                console.warn('Provided store key is invalid :(');
+                return null;
             }
     }
     

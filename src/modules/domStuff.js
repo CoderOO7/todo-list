@@ -4,7 +4,7 @@ import { todoFilterController } from './logic/todoFilters.js';
 import { todoController } from './logic/todos.js';
 import { renderDom } from './render.js';
 
-const DOMStuff = (function () {
+const DOMStuff = (function (document) {
   const modalEl = document.querySelector(".modal");
 
   function _showBaseModal() {
@@ -87,8 +87,7 @@ const DOMStuff = (function () {
         projectController.create(_projectName);
         renderDom.project.list();
         closeModal();
-
-      }else{
+      } else {
         _showEror(_projectNameEl);
       }
     }
@@ -104,10 +103,43 @@ const DOMStuff = (function () {
       renderDom.todo.list(projectController.getActiveProjectTodos());
     }
 
+    function removeProject(event) {
+      const _projectEl = event.currentTarget.parentNode;
+      const _projectElIdx = _projectEl.dataset.index;
+      const _nextActiveProjectElIdx = _projectEl.previousSibling
+        ? _projectEl.previousSibling.dataset.index
+        : _projectEl.nextSibling
+        ? _projectEl.nextSibling.dataset.index - 1
+        : -1;
+
+      const _removed = projectController.remove(_projectElIdx);
+
+      if (!_removed) {
+        console.error("Due to technical error unable to delete the project :(");
+      } else {
+        // Need to remove dangling listener
+        _projectEl.removeEventListener("click", activateProject);
+        renderDom.project.list();
+
+        if (_nextActiveProjectElIdx >= 0) {
+          const _nextActiveProjectEl = document.querySelector(
+            `.sidenav__item-project[data-index='${_nextActiveProjectElIdx}']`
+          );
+          //activate the previous sibling tab
+          const event = new MouseEvent("click");
+          _nextActiveProjectEl.addEventListener("click", activateProject);
+          _nextActiveProjectEl.dispatchEvent(event);
+        } else {
+          renderDom.todo.list();
+        }
+      }
+    }
+
     return {
       showModal,
       closeModal,
       addProject,
+      removeProject,
       activateProject,
       showModalBtnEl,
       addProjectModalFormBtnEl,
@@ -246,7 +278,6 @@ const DOMStuff = (function () {
     }
 
     function renderTaskEditorForm(event) {
-      console.log(event);
       renderDom.todo.taskEditForm();
       _hideTaskEditorAddBtn();
     }
@@ -357,10 +388,14 @@ const DOMStuff = (function () {
     function activateFilterTab(event){
       const _activeFilterTabEl = event.currentTarget;
       const _activeFilterTabIdx = _activeFilterTabEl.dataset.index;
+      const _editorActionBtnAdd = document.querySelector(".main__task-editor-action-btn--add");
 
       _highlightActiveTab(_activeFilterTabEl);
       todoFilterController.setActiveFilterTab(_activeFilterTabIdx);
-      
+      //When filter tab is active, remove option to add task
+      if(_editorActionBtnAdd){
+        _editorActionBtnAdd.remove();
+      }
       renderDom.todoFilter.header();
       renderDom.todo.list(todoFilterController.getActiveFilterTabTodos());
     }
@@ -371,6 +406,6 @@ const DOMStuff = (function () {
   })();
 
   return { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom };
-})();
+})(document);
 
 export const { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom } = DOMStuff;
