@@ -115,6 +115,14 @@ ul {
     font-weight: bold;
 }
 
+.sidenav__item-delete{
+  margin-left: auto;
+}
+
+.sidenav__item-delete:hover{
+  color: red;
+}
+
 .sidenav__expandable{
   height: 450px;
   overflow: hidden;
