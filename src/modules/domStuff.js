@@ -27,6 +27,17 @@ const DOMStuff = (function () {
     _currentActiveTabEl.classList.add("sidenav__item--active");
   }
 
+  function _getActiveTabState(){
+    const _tabs = {};
+    const _activeTabEl = document.querySelector(".sidenav__item--active");
+    if(_activeTabEl.className.includes("sidenav__filter-item")){
+      _tabs.filter = true;
+    }else if(_activeTabEl.className.includes("sidenav__item-project")){
+      _tabs.project = true;
+    }
+    return _tabs;
+  }
+
   function _showEror(formField){
     formField.classList.add("error--validation");
 
@@ -34,7 +45,6 @@ const DOMStuff = (function () {
       formField.setAttribute("Placeholder","Field can't be blank");
 
     }else if(formField.validity.patternMismatch){
-      console.log(formField);
       formField.value = '';
       formField.setAttribute("Placeholder","Allow only alphabets,digits and space");
     }
@@ -109,7 +119,7 @@ const DOMStuff = (function () {
 
     function renderEditHeaderForm(event){
       renderDom.project.editHeaderForm();
-  }
+    }
 
     function submitForm(event){
       event.preventDefault();
@@ -228,7 +238,11 @@ const DOMStuff = (function () {
       _taskEditorForm.reset();
       _taskEditorForm.remove();
       _showTaskEditorAddBtn();
-      renderDom.todo.list(projectController.getActiveProjectTodos());
+      if(_getActiveTabState().project){
+        renderDom.todo.list(projectController.getActiveProjectTodos());
+      }else if(_getActiveTabState().filter){
+        renderDom.todo.list(todoFilterController.getActiveFilterTabTodos());
+      }
     }
 
     function renderTaskEditorForm(event) {

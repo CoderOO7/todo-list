@@ -486,6 +486,10 @@ ul {
   padding-top: 1.4rem;
 }
 
+.modal__todo-task-info_body > * {
+  padding: 0.8rem 0;
+}
+
 /******************
    Common Styling 
 *******************/

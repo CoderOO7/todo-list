@@ -1,6 +1,5 @@
 import {todoController} from './todos.js';
 import {getTodayDate,areDateEquals,isDateFallInCurrentWeek} from '../helper.js';
-import {parseISO,isEqual} from 'date-fns';
 
 const todoFilterFactory = ((id,name)=>{
     const _id = id.toString();
