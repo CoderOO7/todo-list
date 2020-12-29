@@ -1,23 +1,26 @@
-import {todoAppLocalStorage} from './modules/storage/localStorage.js';
+import {todoAppFirebaseStorage} from './modules/storage/firebaseStorage.js';
 import {todoController} from './modules/logic/todos.js';
 import {projectController} from './modules/logic/projects.js';
 import {todoFilterDom} from './modules/domStuff.js';
 import './modules/staticEventsListeners.js';
 import {renderDom} from './modules/render.js';
-import {PROJECT_STORE_KEY, TODO_STORE_KEY} from './constants.js';
+import {PROJECT_COLLECTION_NAME, TODO_COLLECTION_NAME} from './constants.js';
 
-(function initApp(){
+(async function initApp(){
 
-    if(todoAppLocalStorage.getItem(PROJECT_STORE_KEY)){
-        todoAppLocalStorage.getItem(PROJECT_STORE_KEY).forEach((project)=>{
-            projectController.addProjectToStore(project);
-        });
-    }
-    if(todoAppLocalStorage.getItem(TODO_STORE_KEY)){
-        todoAppLocalStorage.getItem(TODO_STORE_KEY).forEach((todo)=>{
-            todoController.addTodoTaskToStore(todo);
-        });
-    }
+    await todoAppFirebaseStorage.getItems(PROJECT_COLLECTION_NAME)
+    .then((projects)=>{
+        projects.forEach((project)=>{
+            projectController.addProjectToStore(project.data());
+        })
+    })
+    
+    await todoAppFirebaseStorage.getItems(TODO_COLLECTION_NAME)
+    .then((todos)=>{
+        todos.forEach((todo)=>{
+            todoController.addTodoTaskToStore(todo.data());
+        })
+    })
     
     //Render DOM
     renderDom.todoFilter.list();

@@ -1,5 +1,5 @@
-import {todoAppLocalStorage} from '../storage/localStorage.js';
-import {TODO_STORE_KEY} from '../../constants.js';
+import {todoAppFirebaseStorage} from '../storage/firebaseStorage.js';
+import {TODO_COLLECTION_NAME} from '../../constants.js';
 
 const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
     const id = '' + Date.now();
@@ -38,7 +38,7 @@ const todoController = (function(){
         let _todoTaskItem = null;
         _todoTaskStore.forEach((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
-                return  _todoTaskItem  = JSON.parse(JSON.stringify(_todoTaskStore[idx]));
+                return  _todoTaskItem  = {..._todoTaskStore[idx]};
             }
         })
         return _todoTaskItem;
@@ -47,17 +47,16 @@ const todoController = (function(){
     function create(activeProjectId,title,description,date){
         let newTodoTask = todoTaskFactory(activeProjectId,title,description,date);
         addTodoTaskToStore(newTodoTask);
-        todoAppLocalStorage.storeItem(TODO_STORE_KEY,[..._todoTaskStore]);
+        todoAppFirebaseStorage.addItem(TODO_COLLECTION_NAME, newTodoTask.id, newTodoTask);
     }
 
     function remove(todoTaskId){
         let _isDeleted = false;
-        _todoTaskStore.forEach((todoTask,idx)=>{
+        _todoTaskStore.some((todoTask,idx)=>{
             if(todoTask.id === todoTaskId){
                 _todoTaskStore.splice(idx,1);
-                todoAppLocalStorage.storeItem(TODO_STORE_KEY,[..._todoTaskStore]);
+                todoAppFirebaseStorage.deleteItem(TODO_COLLECTION_NAME, todoTask.id);
                 _isDeleted = true;
-                return;
             }
         });
         return _isDeleted;
@@ -71,7 +70,7 @@ const todoController = (function(){
                 _todoTaskStore[idx].description = description;
                 _todoTaskStore[idx].dueDate = dueDate;
                 _todoTaskStore[idx].completed = completed;
-                todoAppLocalStorage.storeItem(TODO_STORE_KEY,[..._todoTaskStore]);
+                todoAppFirebaseStorage.updateItem(TODO_COLLECTION_NAME, todoTask.id, todoTask);
                 _isUpdated =true;
                 return;
             }

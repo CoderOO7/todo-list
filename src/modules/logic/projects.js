@@ -1,7 +1,6 @@
 import {todoController} from './todos.js';
-import {todoAppLocalStorage} from '../storage/localStorage.js';
-import {PROJECT_STORE_KEY} from '../../constants.js';
-
+import {todoAppFirebaseStorage} from '../storage/firebaseStorage.js';
+import {PROJECT_COLLECTION_NAME} from '../../constants.js';
 
 const projectFactory = ((name)=>{
     const id = '' + Date.now();
@@ -23,7 +22,7 @@ const projectController = (function(){
     function create(projectName){
         let newProject = projectFactory(projectName);
         addProjectToStore(newProject);
-        todoAppLocalStorage.storeItem(PROJECT_STORE_KEY,_projectStore);
+        todoAppFirebaseStorage.addItem(PROJECT_COLLECTION_NAME, newProject.id, newProject);
     }
 
     function remove(projectIdx){
@@ -35,7 +34,7 @@ const projectController = (function(){
 
             if(todosDeleted === true){
                 _projectStore.splice(projectIdx,1);
-                todoAppLocalStorage.storeItem(PROJECT_STORE_KEY,_projectStore);
+                todoAppFirebaseStorage.deleteItem(PROJECT_COLLECTION_NAME, _project.id);
                 return true;
             }
 
@@ -48,8 +47,9 @@ const projectController = (function(){
 
     function updateActiveProject(projectName){
         if(_projectStore[_activeProjectIdx]){
-            _projectStore[_activeProjectIdx].name = projectName;
-            todoAppLocalStorage.storeItem(PROJECT_STORE_KEY,_projectStore);
+            const _project = _projectStore[_activeProjectIdx];
+            _project.name = projectName;
+            todoAppFirebaseStorage.updateItem(PROJECT_COLLECTION_NAME,_project.id, _project);
             return true;
         }
         return false;
