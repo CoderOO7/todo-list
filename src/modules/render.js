@@ -323,8 +323,11 @@ const renderDom = (function () {
       const modalBody = document.createElement("div");
       const taskTitle = document.createElement("h1");
       const taskDescription = document.createElement("p");
+      const taskDescriptionBold = document.createElement("strong");
       const taskDueDate = document.createElement("p");
+      const taskDueDateBold = document.createElement("strong");
       const taskProject = document.createElement("p");
+      const taskProjectBold = document.createElement("strong");
 
       modalItem.classList.add("modal__item","modal__todo-task-info");
       modalHeader.classList.add("modal__todo-task-info_header");
@@ -336,9 +339,19 @@ const renderDom = (function () {
       closeBtn.textContent = "X";
       
       taskTitle.textContent = _todoTask.title;
-      taskDescription.textContent = `Description: ${_todoTask.description}`;
-      taskDueDate.textContent = `DueDate: ${_todoTask.dueDate}`;
-      taskProject.textContent = `Project: ${projectController.getProjectById(_todoTask.projectId).name}`;
+
+      taskDescriptionBold.textContent = "Description: ";
+      taskDescription.insertAdjacentElement("afterBegin",taskDescriptionBold);
+      taskDescription.insertAdjacentText("beforeEnd",_todoTask.description);
+      
+      
+      taskDueDateBold.textContent = "DueDate: ";
+      taskDueDate.insertAdjacentElement("afterBegin",taskDueDateBold);
+      taskDueDate.insertAdjacentText("beforeEnd",_todoTask.dueDate);
+
+      taskProjectBold.textContent = "Project: ";
+      taskProject.insertAdjacentElement("afterBegin",taskProjectBold);
+      taskProject.insertAdjacentText("beforeEnd",projectController.getProjectById(_todoTask.projectId).name);
 
       modalItem.append(modalHeader,modalBody);
       modalHeader.append(taskTitle,closeBtn);
