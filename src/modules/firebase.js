@@ -1,8 +1,11 @@
+// Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from 'firebase/app';
+
+//Add firebase products you want to use
 import 'firebase/firestore';
 import 'firebase/analytics';
+import 'firebase/auth';
 
-const settings = { timestampsInSnapshots: true };
 const config = {
     apiKey: "AIzaSyCSlg4WCuQR7wlpLjfSHoBzK2cRolFtbs0",
     authDomain: "todo-list-c1025.firebaseapp.com",
@@ -13,8 +16,7 @@ const config = {
     measurementId: "G-QJNNLCBVFK"
 };
 
+//Initialize firebase
 firebase.initializeApp(config);
-firebase.firestore().settings(settings);
-firebase.analytics();
 
 export default firebase;

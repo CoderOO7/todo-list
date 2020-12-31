@@ -405,7 +405,27 @@ const DOMStuff = (function (document) {
     };
   })();
 
-  return { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom };
+  const userAuthDom = (()=>{
+    
+    function handleLogIn(userName){
+      document.querySelector('.screen__home').classList.remove('screen--hide');
+      document.querySelector('.screen__auth').classList.add('screen--hide');
+      document.querySelector('.header__user-display').textContent = `Hi, ${userName}`;
+    }
+
+    function handleLogOut(){
+      document.querySelector('.screen__home').classList.add('screen--hide');
+      document.querySelector('.screen__auth').classList.remove('screen--hide');
+    }
+
+    return {
+      handleLogIn,
+      handleLogOut
+    }
+
+  })();
+
+  return { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom,  userAuthDom};
 })(document);
 
-export const { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom } = DOMStuff;
+export const { projectDom, projectHeaderDom, sidenavDom, todoTaskDom, todoFilterDom, userAuthDom} = DOMStuff;
