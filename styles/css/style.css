@@ -18,7 +18,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: calc(62.5% - 0.8vw);
 }
 
 body {
@@ -33,10 +33,6 @@ ul {
   min-height: 100vh;
 }
 
-.screen__home, .screen__auth{
-  height: 100%;
-}
-
 .screen__auth{
   display: flex;
   justify-content: center;
@@ -47,6 +43,7 @@ ul {
   color:white;
  
 }
+
 .screen__auth-bg_img {
   position: absolute;
   height: 100%;
@@ -61,6 +58,9 @@ ul {
   padding-bottom: 4rem;
 }
 
+.screen__auth > *:not(:first-child){
+  padding: 2rem;
+}
 
 .screen--hide{
   display: none !important;
@@ -80,7 +80,7 @@ ul {
 .header {
   grid-area: header;
   display: flex;
-  padding: 0 5vh;
+  padding: 0 1vh;
   background-color: var(--mine-shaft-light);
   z-index: 2;
 }
@@ -241,7 +241,7 @@ ul {
 }
 
 .main__tasks-wrapper{
-  padding: 4rem 14vmin;
+  padding: 4rem 4vmin;
 }
 
 .main__task-header{
@@ -341,7 +341,6 @@ ul {
 .main__task-item-actions{
   display: flex;
   justify-content: flex-end;
-  opacity: 0;
 }
 
 .main__task-item-actions > * {
@@ -434,6 +433,7 @@ ul {
 
 .task-editor-form__control--datepicker{
   border: 1px solid var(--alto);
+  width: fit-content;
 }
 
 .footer {
@@ -471,7 +471,7 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 70vmin;
+  width: 88vmin;
   font-size: 2.4rem;
   height: auto;
   background: var(--albaster);
@@ -555,6 +555,10 @@ ul {
 /******************
    Common Styling 
 *******************/
+.screen__home, .screen__auth{
+  min-height: 100vh;
+}
+
 .header__btn, 
 .sidenav__btn,
 .main__task-item-checkbox-btn,
@@ -638,6 +642,14 @@ ul {
 
 /* Non-mobile style 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
+  html{
+    font-size: 62.5%;
+  }
+
+  .header{
+    padding: 0 4vh;
+  }
+
   .grid-container{
       grid-template-columns: 250px 1fr;
       grid-template-areas:
@@ -651,6 +663,18 @@ ul {
   .sidenav--active ~ .main{
     grid-column: 2/3;
     transition:  all 0.6s ease-in-out;
+  }
+
+  .main__tasks-wrapper{
+    padding: 4rem 14vmin;
+  }
+
+  .main__task-item-actions{
+    opacity: 0;
+  }
+  
+  .modal__form{
+    width: 70vmin;
   }
 }
 
