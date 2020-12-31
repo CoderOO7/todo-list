@@ -356,7 +356,7 @@ const DOMStuff = (function (document) {
       const _todoTaskId = event.currentTarget.parentNode.parentNode.dataset.todoTaskId;
 
       const _todoTaskObj = todoController.getTodoTask(_todoTaskId);
-      _todoTaskObj.completed = true;
+      _todoTaskObj.completed = !_todoTaskObj.completed;
       const _isUpdated =  todoController.update(
         _todoTaskId,
         _todoTaskObj.title,
