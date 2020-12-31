@@ -29,6 +29,43 @@ ul {
   list-style: none;
 }
 
+.screen{
+  min-height: 100vh;
+}
+
+.screen__home, .screen__auth{
+  height: 100%;
+}
+
+.screen__auth{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  font-size: 1.8rem;
+  color:white;
+ 
+}
+.screen__auth-bg_img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url("../../assets/images/todobg.jpeg") no-repeat center;
+  background-size: cover;
+  filter: blur(6px);
+  z-index: -9999;
+}
+
+.screen__auth > h1{
+  padding-bottom: 4rem;
+}
+
+
+.screen--hide{
+  display: none !important;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -50,6 +87,24 @@ ul {
 
 .header__inner {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.header__user-display{
+  font-size: 2rem;
+  color: white;
+  padding-right: 2rem;
+}
+
+.header__left{
+  display: flex;
+}
+
+.header__right{
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
