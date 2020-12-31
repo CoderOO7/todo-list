@@ -23,7 +23,7 @@ https://coderoo7.github.io/todo-list/
 
 ## TechStack
 
-**1. FrontEnd:** Html5/CSS3 ,Javascript ES6.
+**1. FrontEnd:** Html5/CSS3 ,Javascript ES6. <br>
 **2. Backend:** NodeJS, Google Firestore Database.
 
 
