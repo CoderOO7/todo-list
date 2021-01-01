@@ -1,5 +1,5 @@
 import {todoAppFirebaseStorage} from '../storage/firebaseStorage.js';
-import {TODO_COLLECTION_NAME} from '../../constants.js';
+import {TODO_COLLECTION_NAME} from '../constants.js';
 
 const todoTaskFactory = ((activeProjectId,title,description,dueDate)=>{
     const id = '' + Date.now();

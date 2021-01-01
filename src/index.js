@@ -6,7 +6,7 @@ import {renderDom} from './modules/render.js';
 import firebase from './modules/firebase.js';
 import firebaseAuthUI from './modules/firebaseAuthUI';
 import './modules/staticEventsListeners.js';
-import {PROJECT_COLLECTION_NAME, TODO_COLLECTION_NAME} from './constants.js';
+import {PROJECT_COLLECTION_NAME, TODO_COLLECTION_NAME} from './modules/constants.js';
 
 (function initApp(){
 
@@ -19,7 +19,6 @@ import {PROJECT_COLLECTION_NAME, TODO_COLLECTION_NAME} from './constants.js';
             
             user.getIdToken().then(function(accessToken) {
                 (async () =>{
-
                     userAuthDom.handleLogIn(userName);
                     document.querySelector('.header__signout-btn').onclick = () => {
                         firebase.auth().signOut();

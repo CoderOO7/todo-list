@@ -1,4 +1,3 @@
-import { DEFAULT_PROJECT_ID } from '../constants.js';
 import { projectController } from './logic/projects.js';
 import { todoFilterController } from './logic/todoFilters.js';
 import { todoController } from './logic/todos.js';

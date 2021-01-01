@@ -1,6 +1,6 @@
 import {todoController} from './todos.js';
 import {todoAppFirebaseStorage} from '../storage/firebaseStorage.js';
-import {PROJECT_COLLECTION_NAME} from '../../constants.js';
+import {PROJECT_COLLECTION_NAME} from '../constants.js';
 
 const projectFactory = ((name)=>{
     const id = '' + Date.now();
