@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "This Project is part of theodinprojectcurriculum.",
   "private": true,
+  "engines": {
+    "node": ">=10.0.0 && <11.0.0",
+    "npm": ">=6.0.0"
+  },
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack serve --content-base dist --mode=development",
