@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production",
-    "dev": "webpack serve --content-base dist --mode=development",
+    "dev": "webpack serve --mode=development",
     "deploy": "npm run build && git subtree push --prefix dist origin gh-pages",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,11 +25,12 @@
   "homepage": "https://github.com/CoderOO7/todo-list#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.15",
     "@babel/preset-env": "^7.12.11",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "eslint": "^7.17.0",
+    "html-webpack-plugin": "^5.0.0",
     "husky": "^4.3.7",
     "lint-staged": "10.5.3",
     "mrm": "2.5.13",
@@ -40,7 +41,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
+    "@babel/runtime": "^7.12.13",
     "date-fns": "^2.16.1",
     "firebase": "^8.2.1",
     "firebaseui": "^4.7.1"
@@ -53,5 +54,10 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  }
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "IE 10"
+  ]
 }
